@@ -3,5 +3,7 @@
   <persistence-unit name="com.mti" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>com.mti.webshare.model.Shop</class>
+    <properties>
+    </properties>
   </persistence-unit>
 </persistence>
