@@ -1,4 +1,4 @@
-package com.mti.shop.controller;
+package com.mti.webshare.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +13,7 @@ public class Controller
 	public ModelAndView shopAdd()
         {
 		ModelAndView model = new ModelAndView("addShop");
-		model.addObject("msg", "hello world");
+		model.addObject("msg", "Bienvenue sur webshare");
 
 		return model;
 	}

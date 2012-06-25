@@ -1,4 +1,4 @@
-package com.mti.shop.dao;
+package com.mti.webshare.dao;
 
 public interface GenericDao {
 

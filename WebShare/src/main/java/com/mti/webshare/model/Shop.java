@@ -1,4 +1,4 @@
-package com.mti.shop.model;
+package com.mti.webshare.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
