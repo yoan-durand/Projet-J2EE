@@ -2,16 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `mydb` ;
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`user`
+-- Table `WebShare`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`user` ;
+DROP TABLE IF EXISTS `WebShare`.`user` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`user` (
+CREATE  TABLE IF NOT EXISTS `WebShare`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `firstname` VARCHAR(45) NOT NULL ,
   `password` VARCHAR(45) NOT NULL ,
@@ -24,11 +21,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`file`
+-- Table `WebShare`.`file`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`file` ;
+DROP TABLE IF EXISTS `WebShare`.`file` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`file` (
+CREATE  TABLE IF NOT EXISTS `WebShare`.`file` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `public` TINYINT(1) NOT NULL ,
@@ -41,11 +38,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`event`
+-- Table `WebShare`.`event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`event` ;
+DROP TABLE IF EXISTS `WebShare`.`event` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`event` (
+CREATE  TABLE IF NOT EXISTS `WebShare`.`event` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `action` INT NULL ,
   `user_id` INT NOT NULL ,
@@ -56,23 +53,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`event` (
   INDEX `fk_event_file1` (`file_id` ASC) ,
   CONSTRAINT `fk_Event_User1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `mydb`.`user` (`id` )
+    REFERENCES `WebShare`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_file1`
     FOREIGN KEY (`file_id` )
-    REFERENCES `mydb`.`file` (`id` )
+    REFERENCES `WebShare`.`file` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`user_has_right_to_file`
+-- Table `WebShare`.`user_has_right_to_file`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`user_has_right_to_file` ;
+DROP TABLE IF EXISTS `WebShare`.`user_has_right_to_file` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`user_has_right_to_file` (
+CREATE  TABLE IF NOT EXISTS `WebShare`.`user_has_right_to_file` (
   `user_id` INT NOT NULL ,
   `file_id` INT NOT NULL ,
   `state` TINYINT(1) NOT NULL ,
@@ -81,12 +78,12 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`user_has_right_to_file` (
   INDEX `fk_User_has_File_User` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_File_User`
     FOREIGN KEY (`user_id` )
-    REFERENCES `mydb`.`user` (`id` )
+    REFERENCES `WebShare`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_has_File_File1`
     FOREIGN KEY (`file_id` )
-    REFERENCES `mydb`.`file` (`id` )
+    REFERENCES `WebShare`.`file` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
