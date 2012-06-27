@@ -2,7 +2,7 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
   <persistence-unit name="com.mti" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>com.mti.webshare.model.Shop</class>
+    <class>com.mti.webshare.model.User</class>
     <properties>
     </properties>
   </persistence-unit>
