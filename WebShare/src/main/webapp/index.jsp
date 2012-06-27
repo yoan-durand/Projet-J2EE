@@ -7,6 +7,6 @@
             password : <input type="text" name="password" />
             <input type="submit" value="connexion" />
         </form>
-        <a href="/views/addUser.jsp" > creer un compte</a>
+        <a href="/Inscription" > creer un compte</a>
     </body>
 </html>

@@ -4,7 +4,7 @@
  */
 package com.mti.webshare.service;
 
-import com.mti.webshare.dao.UserDAO;
+import com.mti.webshare.dao.DAO;
 import com.mti.webshare.daoImpl.UserDAOImpl;
 import com.mti.webshare.model.User;
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class addUser extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest(request, response);
+        request.getRequestDispatcher("/views/addUser.jsp").forward(request, response);
     }
 
     /**
@@ -89,7 +89,7 @@ public class addUser extends HttpServlet
     {
         String nom = request.getParameter("lastname");
         String prenom = request.getParameter("firstname");
-        String password = request.getParameter("pass");
+        String password = request.getParameter("password");
         String email = request.getParameter("email");
         
         if (!nom.isEmpty() && !prenom.isEmpty() && !password.isEmpty()&& !email.isEmpty())
@@ -103,7 +103,7 @@ public class addUser extends HttpServlet
             user.setLastName(nom);
             user.setPassword(password);
             
-            if (add.createUser(user))
+            if (add.create(user))
             {
                 response.sendRedirect("index.jsp");
             }
@@ -123,6 +123,6 @@ public class addUser extends HttpServlet
     @Override
     public String getServletInfo()
     {
-        return "Short description";
+        return "Ajout d'un utilisateur";
     }// </editor-fold>
 }
