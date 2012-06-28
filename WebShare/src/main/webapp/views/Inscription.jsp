@@ -8,7 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="other.htm" > Autre Action du Controller Test</a>
         <form action="" method="post">
             
             Nom: <input type="text" name="lastname" />

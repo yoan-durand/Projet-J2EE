@@ -6,7 +6,9 @@ package com.mti.webshare.model;
 
 
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
@@ -16,15 +18,11 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "user")
-
 public class User
 {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-    private String lastName;
-    private String fisrtName;
+    private int id;
+    private String lastname;
+    private String fisrtname;
     private String password;
     private String email;
     private Boolean deleted;
@@ -49,26 +47,6 @@ public class User
         this.email = email;
     }
 
-    public String getFisrtName()
-    {
-        return fisrtName;
-    }
-
-    public void setFisrtName(String fisrtName)
-    {
-        this.fisrtName = fisrtName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
     public String getPassword()
     {
         return password;
@@ -79,15 +57,32 @@ public class User
         this.password = password;
     }
     
-    
-    public Integer getId() 
+    @Id
+    @GeneratedValue
+    public int getId() 
     {
         return id;
     }
 
-    public void setId(Integer id) 
+    public void setId(int id) 
     {
         this.id = id;
+    }
+
+    public String getFisrtname() {
+        return fisrtname;
+    }
+
+    public void setFisrtname(String fisrtname) {
+        this.fisrtname = fisrtname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
     
