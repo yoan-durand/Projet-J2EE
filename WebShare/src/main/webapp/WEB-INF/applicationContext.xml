@@ -23,7 +23,6 @@
         <property name="packagesToScan" value="com.mti.webshare.model"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <!--<prop key="hibernate.hbm2ddl.auto">create</prop>--> <!-- Uncomment on first execution to create the tables automatically. It will drop-create each time, so only the first time -->
             </props>
