@@ -19,9 +19,11 @@ a
     text-decoration:none;
 }
 
-li
+li , ul
 {
-   list-style-type:none; 
+   list-style-type:none;
+   margin: 0px;
+   padding:0px
 }
 
 body
@@ -29,6 +31,25 @@ body
     
 }
 
+#page
+{
+    width:1000px;
+    margin:auto;
+    
+}
+
 /*Header*/
 
+
+/*Menu*/
+#menu
+{
+    padding-top:10px;
+    padding-bottom:30px;
+}
+
+.menu_item
+{
+    margin-right: 10px;
+}
 

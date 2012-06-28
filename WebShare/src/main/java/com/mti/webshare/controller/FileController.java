@@ -34,7 +34,7 @@ public class FileController {
     @RequestMapping("/navigator.htm")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            
             return new ModelAndView("navigator", "message", "Remove method called");
     }
     
