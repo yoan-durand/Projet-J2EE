@@ -1,0 +1,34 @@
+/*General*/
+.float-left
+{
+    float:left;
+}
+
+.float-right
+{
+    float:right;
+}
+
+.clear
+{
+    clear:both;
+}
+
+a
+{
+    text-decoration:none;
+}
+
+li
+{
+   list-style-type:none; 
+}
+
+body
+{
+    
+}
+
+/*Header*/
+
+

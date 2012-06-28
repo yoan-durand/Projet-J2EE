@@ -39,5 +39,5 @@
     </bean>
 
     <bean name="/test/index.htm" class="com.mti.webshare.controller.TestController"/>
-
+    <bean name="/File/navigator.htm" class="com.mti.webshare.controller.FileController"/>
 </beans>

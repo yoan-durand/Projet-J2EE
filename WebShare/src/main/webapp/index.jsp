@@ -9,5 +9,6 @@
         </form>
         <a href="/Inscription" > creer un compte</a>
         <a href="/test/index.htm" > Controller Test</a>
+        <a href="/File/navigator.htm"> Files navigator </a>
     </body>
 </html>
