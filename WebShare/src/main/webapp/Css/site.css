@@ -1,0 +1,55 @@
+/*General*/
+.float-left
+{
+    float:left;
+}
+
+.float-right
+{
+    float:right;
+}
+
+.clear
+{
+    clear:both;
+}
+
+a
+{
+    text-decoration:none;
+}
+
+li , ul
+{
+   list-style-type:none;
+   margin: 0px;
+   padding:0px
+}
+
+body
+{
+    
+}
+
+#page
+{
+    width:1000px;
+    margin:auto;
+    
+}
+
+/*Header*/
+
+
+/*Menu*/
+#menu
+{
+    padding-top:10px;
+    padding-bottom:30px;
+}
+
+.menu_item
+{
+    margin-right: 10px;
+}
+
