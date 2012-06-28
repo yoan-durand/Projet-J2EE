@@ -9,7 +9,7 @@
     </head>
     <body>
         <a href="other.htm" > Autre Action du Controller Test</a>
-        <form action="" method="post">
+        <form action="inscription.htm" method="post">
             
             Nom: <input type="text" name="lastname" />
             Prenom: <input type="text" name="firstname"/>

@@ -9,6 +9,7 @@ import com.mti.webshare.dao.DAO;
 import com.mti.webshare.hibernatesession.HibernateUtils;
 import com.mti.webshare.model.User;
 import java.util.List;
+import org.hibernate.Session;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -29,7 +30,10 @@ public class UserDAOImpl extends HibernateDaoSupport implements DAO<User>
         
         try
         {
-            getHibernateTemplate().save(user);
+            Session s = getSession();
+            s.save(user);
+            s.beginTransaction();
+            s.close();
             return true;
         }
         catch (Exception e)

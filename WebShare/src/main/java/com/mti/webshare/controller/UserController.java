@@ -1,5 +1,6 @@
 package com.mti.webshare.controller;
 
+import com.mti.webshare.daoImpl.UserDAOImpl;
 import com.mti.webshare.model.User;
 import java.util.Map;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,9 @@ public class UserController
         {
 		ModelAndView model = new ModelAndView("addShop");
 		model.addObject("msg", "Bienvenue sur webshare");
-
+                  UserDAOImpl user = new UserDAOImpl();
+                  user.getUserByEmail("toto");
+                  
 		return model;
 	}
         
