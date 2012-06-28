@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -19,26 +19,32 @@
 	<context:component-scan base-package="com.mti.webshare.controller" />
 	<context:component-scan base-package="com.mti.webshare.model" />
 	
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="myDataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/WebShare" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
 
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaDialect">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
-		</property>
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
-				<property name="databasePlatform" value="org.hibernate.dialect.MySQLInnoDBDialect" />
-				<property name="generateDdl" value="true" />
-			</bean>
-		</property>
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+                <property name="packagesToScan" value="com.mti.webshare.model" />
+		<property name="hibernateProperties">
+                    <props>
+                        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                    </props>
+                </property>
+                    
 	</bean>
+        
+        <!--Transaction -->
+        
+        <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" autowire="byType"/>
+        
+        
+        <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+        <bean class="org.springframework." />
+        
 </beans>

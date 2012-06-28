@@ -69,11 +69,9 @@ public class Inscription extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-<<<<<<< HEAD
-        response.sendRedirect("views/addUser.jsp");
-=======
+
         request.getRequestDispatcher("/views/addUser.jsp").forward(request, response);
->>>>>>> a7e9330dabea8d6e3b044b372fa077358d4d9906
+
     }
 
     /**
