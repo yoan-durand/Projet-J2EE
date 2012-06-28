@@ -9,9 +9,8 @@ import com.mti.webshare.dao.DAO;
 import com.mti.webshare.hibernatesession.HibernateUtils;
 import com.mti.webshare.model.User;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
  *
@@ -21,19 +20,16 @@ import org.hibernate.Transaction;
  */
 
 
-public class UserDAOImpl implements DAO<User>
+public class UserDAOImpl extends HibernateDaoSupport implements DAO<User>
 {
     
     @Override
     public Boolean create(User user)
     {
-        Session s = HibernateUtils.getSession();
-        Transaction t = s.beginTransaction();
+        
         try
         {
-            s.save(user);
-            t.commit();
-            s.close();
+            getHibernateTemplate().save(user);
             return true;
         }
         catch (Exception e)
@@ -66,14 +62,21 @@ public class UserDAOImpl implements DAO<User>
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public static User getUserByEmail(String email)
+    public User getUserByEmail(String email)
     {
-        Session s = HibernateUtils.getSession();
-        Query q = s.createQuery("from user where email= :email");
-        q.setString(":email", email);
-        User user = (User) q.uniqueResult();
-        
-        return user;
+        try
+        {
+            List<User> listuser = getHibernateTemplate().find("from User u where u.email=?", email);
+            if (listuser.isEmpty())
+                return null;
+            else
+                return listuser.get(0);
+        }
+        catch (Exception e)
+        {
+             return null;
+        }
+      
         
     }
 

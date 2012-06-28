@@ -16,13 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/test")
-public class TestController {
+public class TestController 
+{
 
     protected final Log logger = LogFactory.getLog(getClass());
 
     @RequestMapping("/index.htm")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
 
         String now = (new Date()).toString();
 
@@ -30,7 +32,8 @@ public class TestController {
     }
     
     @RequestMapping("/other.htm")
-    public ModelAndView other() {
+    public ModelAndView other() 
+    {
         return new ModelAndView("addShop", "message", "Remove method called");
     }
 
