@@ -10,6 +10,11 @@
         <servlet-name>index</servlet-name>
         <servlet-class>com.mti.webshare.service.index</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>inscription</servlet-name>
+        <servlet-class>com.mti.webshare.service.Inscription</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -33,4 +38,11 @@
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>inscription</servlet-name>
+        <url-pattern>/inscription</url-pattern>
+    </servlet-mapping>
+    
+    
+    
 </web-app>

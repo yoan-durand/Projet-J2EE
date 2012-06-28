@@ -12,7 +12,7 @@
         <title>Ajout Utilisateur</title>
     </head>
     <body>
-        <form action="addUserServlet" method="post">
+        <form action="/inscription" method="post">
             
             Nom: <input type="text" name="lastname" />
             Prenom: <input type="text" name="firstname"/>

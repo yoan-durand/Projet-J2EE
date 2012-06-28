@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yoan
  */
-public class addUser extends HttpServlet
+public class Inscription extends HttpServlet
 {
 
     /**
@@ -69,7 +69,7 @@ public class addUser extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest(request, response);
+        response.sendRedirect("views/addUser.jsp");
     }
 
     /**
@@ -89,7 +89,7 @@ public class addUser extends HttpServlet
     {
         String nom = request.getParameter("lastname");
         String prenom = request.getParameter("firstname");
-        String password = request.getParameter("pass");
+        String password = request.getParameter("password");
         String email = request.getParameter("email");
         
         if (!nom.isEmpty() && !prenom.isEmpty() && !password.isEmpty()&& !email.isEmpty())
