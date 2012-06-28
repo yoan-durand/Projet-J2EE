@@ -45,7 +45,7 @@
             
            
             <ul class="clear" id="file_list">
-                <li class="file_item">
+                <li class="file_item">      
                     <strong class="file_name float-left">Nom</strong>
                     <strong class="file_type float-left">Type</strong>
                     <strong class="file_modification float-left">Modification</strong>
@@ -53,7 +53,7 @@
                     <br class="clear"/>
                 </li>
                 <li class="file_item">
-                    <span class="file_name float-left">hello world.txt</span >
+                    <span class="file_name float-left"><img class="file_logo float-left" src="logo" /> hello world.txt</span >
                     <span  class="file_type float-left">.txt file</span >
                     <span  class="file_modification float-left">01/01/2012</span >
                     <span  class="file_visibility float-left">private</span >

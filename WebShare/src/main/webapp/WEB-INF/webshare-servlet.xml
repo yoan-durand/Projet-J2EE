@@ -18,14 +18,4 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-<<<<<<< HEAD
-    <bean id="userDAO" class="com.mti.webshare.daoImpl.UserDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-        
-
-    <bean name="/test/index.htm" class="com.mti.webshare.controller.TestController"/>
-    <bean name="/File/navigator.htm" class="com.mti.webshare.controller.FileController"/>
-=======
->>>>>>> d7a60ba83340c3182b04031e267f96f377f7a632
 </beans>

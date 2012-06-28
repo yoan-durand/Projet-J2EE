@@ -33,7 +33,7 @@
     <!-- Transactionnal -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" autowire="byType"/>
     <tx:annotation-driven/>
-	
+
     <!-- DAO -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
     <bean class="com.mti.webshare.dao.UserDAOHibernate"/>
