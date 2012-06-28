@@ -8,7 +8,17 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World! it is now <c:out value="${now}"/></h1>
         <a href="other.htm" > Autre Action du Controller Test</a>
+        <form action="" method="post">
+            
+            Nom: <input type="text" name="lastname" />
+            Prenom: <input type="text" name="firstname"/>
+            Email: <input type="text" name="email"/>
+            Mot de passe: <input type="text" name="password">
+            Confirmer mot de passe: <input type="text" name="confpass">
+            
+            <input type="submit" value="valider">
+            
+        </form>
     </body>
-</html>
+ </html>

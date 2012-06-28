@@ -89,7 +89,11 @@ public class index extends HttpServlet
 
         if(!login.isEmpty() && !password.isEmpty())
         {
-            User currentUser = UserDAOImpl.getUserByEmail(login);
+            User currentUser = new User();
+            UserDAOImpl impl = new UserDAOImpl();
+            
+            currentUser = impl.getUserByEmail(login);
+            
             
             if (currentUser != null)
             {

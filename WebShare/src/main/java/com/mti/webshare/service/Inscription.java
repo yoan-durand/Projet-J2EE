@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yoan
  */
-public class addUser extends HttpServlet
+public class Inscription extends HttpServlet
 {
 
     /**
@@ -69,7 +69,9 @@ public class addUser extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+
         request.getRequestDispatcher("/views/addUser.jsp").forward(request, response);
+
     }
 
     /**
