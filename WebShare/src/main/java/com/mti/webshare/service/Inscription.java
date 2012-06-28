@@ -4,7 +4,7 @@
  */
 package com.mti.webshare.service;
 
-import com.mti.webshare.dao.UserDAO;
+import com.mti.webshare.dao.DAO;
 import com.mti.webshare.daoImpl.UserDAOImpl;
 import com.mti.webshare.model.User;
 import java.io.IOException;
@@ -69,7 +69,11 @@ public class Inscription extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+<<<<<<< HEAD
         response.sendRedirect("views/addUser.jsp");
+=======
+        request.getRequestDispatcher("/views/addUser.jsp").forward(request, response);
+>>>>>>> a7e9330dabea8d6e3b044b372fa077358d4d9906
     }
 
     /**
@@ -103,7 +107,7 @@ public class Inscription extends HttpServlet
             user.setLastName(nom);
             user.setPassword(password);
             
-            if (add.createUser(user))
+            if (add.create(user))
             {
                 response.sendRedirect("index.jsp");
             }
@@ -123,6 +127,6 @@ public class Inscription extends HttpServlet
     @Override
     public String getServletInfo()
     {
-        return "Short description";
+        return "Ajout d'un utilisateur";
     }// </editor-fold>
 }

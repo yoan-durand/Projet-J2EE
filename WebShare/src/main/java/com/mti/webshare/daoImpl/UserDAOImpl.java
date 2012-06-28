@@ -5,7 +5,7 @@
 
 package com.mti.webshare.daoImpl;
 
-import com.mti.webshare.dao.UserDAO;
+import com.mti.webshare.dao.DAO;
 import com.mti.webshare.hibernatesession.HibernateUtils;
 import com.mti.webshare.model.User;
 import java.util.List;
@@ -21,11 +21,11 @@ import org.hibernate.Transaction;
  */
 
 
-public class UserDAOImpl implements UserDAO
+public class UserDAOImpl implements DAO<User>
 {
-
+    
     @Override
-    public Boolean createUser(User user)
+    public Boolean create(User user)
     {
         Session s = HibernateUtils.getSession();
         Transaction t = s.beginTransaction();
@@ -43,25 +43,25 @@ public class UserDAOImpl implements UserDAO
     }
 
     @Override
-    public Boolean updateUser(User user)
+    public Boolean update(User user)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Boolean deleteUser(User user)
+    public Boolean delete(User user)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public User getUser(Integer id)
+    public User get(Integer id)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<User> getListUser()
+    public List<User> getList()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
