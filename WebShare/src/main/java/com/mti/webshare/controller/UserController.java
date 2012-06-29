@@ -29,9 +29,6 @@ public class UserController
 	public ModelAndView utilisateurs()
         {
             List<User> users =  userDAO.getList();
-            if (eventDAO.create(0, 1, 1, new Date())){
-                return new ModelAndView("addShop", "message", "SUCCESS");
-            }
             return new ModelAndView("addShop", "users", users);
 	}
 	
