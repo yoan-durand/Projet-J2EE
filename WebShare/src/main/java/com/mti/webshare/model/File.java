@@ -6,11 +6,8 @@ package com.mti.webshare.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -41,6 +38,12 @@ public class File
     
     @Column(name="deleted")
     private Boolean deleted;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "event", 
+                joinColumns = { @JoinColumn(name = "id") }, 
+                inverseJoinColumns = { @JoinColumn(name = "file_id") })
+    private List<Event> eventList;
 
     public Boolean getDeleted() {
         return deleted;
@@ -88,5 +91,13 @@ public class File
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
 }

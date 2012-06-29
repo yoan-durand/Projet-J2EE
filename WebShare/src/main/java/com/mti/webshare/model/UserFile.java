@@ -6,7 +6,7 @@ package com.mti.webshare.model;
 
 
 
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.*;
 
 /**
@@ -17,8 +17,8 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table (name="event")
-public class Event
+@Table (name="user_has_right_to_file")
+public class UserFile
 {
     @Id
     @GeneratedValue
@@ -34,7 +34,6 @@ public class Event
     private int file_id;
     
     @Column(name="date")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date eventDate;
 
     public int getEventAction() {
