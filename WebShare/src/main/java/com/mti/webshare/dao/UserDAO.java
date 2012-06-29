@@ -16,10 +16,11 @@ import java.util.List;
  */
 public interface UserDAO
 {
-    public Boolean create (String lastName, String fisrtName, String password, String email);
+    public Boolean create (String lastName, String fisrtname, String password, String email);
     public Boolean update (User user);
     public Boolean delete (User user);
-    public User get (Integer id);
+    public User get (int id);
+    public User getByEmail (String email);
     public List<User> getList ();
     
 }
