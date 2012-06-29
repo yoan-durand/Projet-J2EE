@@ -7,9 +7,6 @@ package com.mti.webshare.dao;
 import com.mti.webshare.model.User;
 import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
