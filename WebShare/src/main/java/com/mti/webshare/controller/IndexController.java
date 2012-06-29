@@ -50,7 +50,7 @@ public class IndexController
             if (user.getPassword().equals(password))
             {
                 request.getSession().setAttribute("user", user);
-               return new ModelAndView("addShop", "message", "SUCCESS");
+               return new ModelAndView("navigator");
             }
             else
             {
