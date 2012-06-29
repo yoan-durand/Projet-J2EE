@@ -60,8 +60,29 @@ public class UserDAOHibernate implements UserDAO {
     }
 
     @Override
-    public User get(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public User get(int id) {
+        try {
+            List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.id=:userId").setProperties(id).list();
+            if (!users.isEmpty()){
+                return users.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        try {
+            List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.email=:userEmail").setProperties(email).list();
+            if (!users.isEmpty()){
+                return users.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -75,22 +96,5 @@ public class UserDAOHibernate implements UserDAO {
             System.out.println(e.getMessage());
             return null;
         }
-    }
-    
-    @Override
-    public User getByEmail (String email)
-    {
-        try
-        {
-           Query q = sessionFactory.getCurrentSession().createQuery("from User where email = ?");
-           q.setParameter(0, email, Hibernate.STRING);
-           
-           User user = (User) q.uniqueResult();
-           return user;
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
+    }    
 }

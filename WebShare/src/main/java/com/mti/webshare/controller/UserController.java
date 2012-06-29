@@ -36,26 +36,23 @@ public class UserController
 	@RequestMapping(value="/Inscription.htm", method = RequestMethod.POST)
 	public ModelAndView inscription_post(HttpServletRequest request, HttpServletResponse response)
         {
-            String nom = request.getParameter("lastname");
-            String prenom = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String firstname = request.getParameter("firstname");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
+            String password2 = request.getParameter("confpass");
 
-            if (!nom.isEmpty() && !prenom.isEmpty() && !password.isEmpty()&& !email.isEmpty())
+            if (!lastname.isEmpty() && !firstname.isEmpty() && !password.isEmpty() 
+                                    && !email.isEmpty() && !password2.isEmpty())
             {
-                if (userDAO.create(nom, prenom, password, email))
-                {
+                if (!password.contentEquals(password2)){
+                   return new ModelAndView("addShop", "message", "Different passwords"); 
+                }
+                if (userDAO.create(lastname, firstname, password, email)){
                     return new ModelAndView("addShop", "message", "SUCCESS");
                 }
-                else
-                {
-                    return new ModelAndView("addShop", "message", "FAIL");
-                }
-
+                return new ModelAndView("addShop", "message", "FAIL");
             }
-
             return new ModelAndView("Inscription");
 	}
-        
-         
 }
