@@ -8,11 +8,8 @@ package com.mti.webshare.controller;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
 import com.mti.webshare.utilitaire.Encryptor;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +41,7 @@ public class IndexController
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         
-        User user = userDao.getByEmail(login);
+        User user = userDao.get(login);
         
         if (user != null)
         {

@@ -73,7 +73,7 @@ public class UserDAOHibernate implements UserDAO {
     }
 
     @Override
-    public User getByEmail(String email) {
+    public User get (String email) {
         try {
             List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.email=:userEmail").setProperties(email).list();
             if (!users.isEmpty()){
