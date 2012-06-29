@@ -17,7 +17,7 @@ package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.model.File;
-import com.mti.webshare.model.FileItem;
+import com.mti.webshare.model.FileView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +25,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -46,12 +47,12 @@ public class FileController {
             throws ServletException, IOException {
         
             List<File> list_file_bdd = fileDAO.getList();
-            List<FileItem> list_file_item = new ArrayList<FileItem> ();
+            List<FileView> list_file_item = new ArrayList<FileView> ();
             
             for(Iterator<File> it = list_file_bdd.iterator (); it.hasNext ();)
             {
-                  FileItem file = new FileItem ();
-                   file.convert(it.next());
+                  FileView file = new FileView ();
+                  file.convert((File)it.next());
                   list_file_item.add(file);
             }
             
@@ -84,7 +85,7 @@ public class FileController {
             items = upload.parseRequest(request);
             Iterator itr = items.iterator();
             while (itr.hasNext())
-            {/*
+            {
                 FileItem item = (FileItem) itr.next();
                 if (item.isFormField())
                 {
@@ -92,9 +93,9 @@ public class FileController {
                 else
                 {
                     String itemName = item.getName();
-                    File savedFile = new File(request.getSession().getServletContext().getRealPath("/")+itemName);//+"uploadedFiles/"
+                    java.io.File savedFile = new java.io.File(request.getSession().getServletContext().getRealPath("/")+itemName);//+"uploadedFiles/"
                     item.write(savedFile);
-                }*/
+                }
             }
         }
         return new ModelAndView("navigator");

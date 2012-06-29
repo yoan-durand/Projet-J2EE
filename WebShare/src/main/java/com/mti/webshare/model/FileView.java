@@ -8,7 +8,7 @@ package com.mti.webshare.model;
  *
  * @author vince
  */
-public class FileItem
+public class FileView
 {
     private int id;
     
