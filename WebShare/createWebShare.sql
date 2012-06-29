@@ -2,6 +2,9 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+DROP SCHEMA IF EXISTS `WebShare` ;
+CREATE SCHEMA IF NOT EXISTS `WebShare` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `WebShare` ;
 
 -- -----------------------------------------------------
 -- Table `WebShare`.`user`
@@ -32,8 +35,15 @@ CREATE  TABLE IF NOT EXISTS `WebShare`.`file` (
   `path` VARCHAR(255) NOT NULL ,
   `isDir` TINYINT(1) NOT NULL ,
   `deleted` TINYINT(1) NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `path_UNIQUE` (`path` ASC) )
+  `parent_id` INT NOT NULL ,
+  PRIMARY KEY (`id`, `parent_id`) ,
+  UNIQUE INDEX `path_UNIQUE` (`path` ASC) ,
+  INDEX `fk_file_file1` (`parent_id` ASC) ,
+  CONSTRAINT `fk_file_file1`
+    FOREIGN KEY (`parent_id` )
+    REFERENCES `WebShare`.`file` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

@@ -7,8 +7,7 @@ package com.mti.webshare.daoimpl;
 
 import com.mti.webshare.dao.EventDAO;
 import com.mti.webshare.model.Event;
-import com.mti.webshare.model.User;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

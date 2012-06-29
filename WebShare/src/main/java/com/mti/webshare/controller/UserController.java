@@ -1,8 +1,10 @@
 package com.mti.webshare.controller;
 
 
+import com.mti.webshare.dao.EventDAO;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,11 +21,17 @@ public class UserController
 {
         @Autowired
         private UserDAO userDAO;
+        @Autowired
+        private EventDAO eventDAO;
+        
         
         @RequestMapping(value="/Utilisateurs.htm", method = RequestMethod.GET)
 	public ModelAndView utilisateurs()
         {
             List<User> users =  userDAO.getList();
+            if (eventDAO.create(0, 1, 1, new Date())){
+                return new ModelAndView("addShop", "message", "SUCCESS");
+            }
             return new ModelAndView("addShop", "users", users);
 	}
 	
