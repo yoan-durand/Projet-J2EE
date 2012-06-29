@@ -44,7 +44,7 @@ public class ConnexionController
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         
-        User user = userDao.getByEmail(login);
+        User user = userDao.get(login);
         
         if (user != null)
         {

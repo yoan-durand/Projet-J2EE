@@ -20,6 +20,6 @@ public interface UserDAO
     public Boolean update (User user);
     public Boolean delete (User user);
     public User get (int id);
-    public User getByEmail (String email);
+    public User get (String email);
     public List<User> getList ();
 }
