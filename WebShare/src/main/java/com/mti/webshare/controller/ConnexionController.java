@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/index")
-public class IndexController 
+public class ConnexionController 
 {
     @Autowired
     private UserDAO userDao;
