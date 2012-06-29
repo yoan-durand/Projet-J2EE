@@ -7,6 +7,7 @@ package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
+import com.mti.webshare.utilitaire.Encryptor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +48,7 @@ public class IndexController
         
         if (user != null)
         {
-            if (user.getPassword().equals(password))
+            if (user.getPassword().equals(Encryptor.getEncodedPassword(password)))
             {
                 request.getSession().setAttribute("user", user);
                return new ModelAndView("navigator");
@@ -57,11 +58,7 @@ public class IndexController
                 return new ModelAndView("addShop", "message", "Fail");
             }
         }
-        else
-        {
-            return new ModelAndView("addShop", "message", "Fail");
-        }
-        
+        return new ModelAndView("");
     }
 
     

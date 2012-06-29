@@ -5,6 +5,7 @@
 package com.mti.webshare.dao;
 
 import com.mti.webshare.model.User;
+import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -33,7 +34,7 @@ public class UserDAOHibernate implements UserDAO {
             user.setLastname(lastName);
             user.setFirstname(fisrtName);
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(Encryptor.getEncodedPassword(password));
             user.setDeleted(Boolean.FALSE);
         
            
