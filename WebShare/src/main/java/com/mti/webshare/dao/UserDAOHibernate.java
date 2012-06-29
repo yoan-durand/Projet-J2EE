@@ -6,6 +6,8 @@ package com.mti.webshare.dao;
 
 import com.mti.webshare.model.User;
 import java.util.List;
+import org.hibernate.Query;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -69,6 +71,23 @@ public class UserDAOHibernate implements UserDAO {
             return users;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    @Override
+    public User getByEmail (String email)
+    {
+        try
+        {
+           Query q = sessionFactory.getCurrentSession().createQuery("from User u where u.email= :email");
+           q.setString(":email", email);
+           
+           User user = (User) q.uniqueResult();
+           return user;
+        }
+        catch (Exception e)
+        {
             return null;
         }
     }

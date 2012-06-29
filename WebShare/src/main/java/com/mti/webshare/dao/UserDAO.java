@@ -21,5 +21,6 @@ public interface UserDAO
     public Boolean delete (User user);
     public User get (Integer id);
     public List<User> getList ();
+    public User getByEmail (String email);
     
 }
