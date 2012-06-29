@@ -47,5 +47,7 @@
 
     <!-- DAO -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-    <bean class="com.mti.webshare.dao.UserDAOHibernate"/>
+    <bean class="com.mti.webshare.daoimpl.UserDAOImpl"/>
+    <bean class="com.mti.webshare.daoimpl.FileDAOImpl"/>
+    <bean class="com.mti.webshare.daoimpl.EventDAOImpl"/>
 </beans>

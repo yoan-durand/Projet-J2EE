@@ -15,34 +15,47 @@
  */
 package com.mti.webshare.controller;
 
+import com.mti.webshare.dao.FileDAO;
+import com.mti.webshare.model.File;
+import com.mti.webshare.model.FileItem;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Iterator;
-import java.io.File;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.*;
-
 @org.springframework.stereotype.Controller
 @RequestMapping("/File")
 public class FileController {
-
-    protected final Log logger = LogFactory.getLog(getClass());
+    
+    @Autowired
+    private FileDAO fileDAO;
 
     @RequestMapping("/navigator.htm")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+            List<File> list_file_bdd = fileDAO.getList();
+            List<FileItem> list_file_item = new ArrayList<FileItem> ();
             
-            return new ModelAndView("navigator", "message", "Remove method called");
+            for(Iterator<File> it = list_file_bdd.iterator (); it.hasNext ();)
+            {
+                  FileItem file = new FileItem ();
+                   file.convert(it.next());
+                  list_file_item.add(file);
+            }
+            
+            return new ModelAndView("navigator", "file_list", list_file_item);
     }
     
     @RequestMapping("/other.htm")
@@ -51,10 +64,9 @@ public class FileController {
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
-    public ModelAndView upload_get()
-            throws ServletException, IOException {
-            
-            return new ModelAndView("Upload");
+    public ModelAndView upload_get() throws ServletException, IOException
+    {
+        return new ModelAndView("Upload");
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.POST)
@@ -72,7 +84,7 @@ public class FileController {
             items = upload.parseRequest(request);
             Iterator itr = items.iterator();
             while (itr.hasNext())
-            {
+            {/*
                 FileItem item = (FileItem) itr.next();
                 if (item.isFormField())
                 {
@@ -82,7 +94,7 @@ public class FileController {
                     String itemName = item.getName();
                     File savedFile = new File(request.getSession().getServletContext().getRealPath("/")+itemName);//+"uploadedFiles/"
                     item.write(savedFile);
-                }
+                }*/
             }
         }
         return new ModelAndView("navigator");

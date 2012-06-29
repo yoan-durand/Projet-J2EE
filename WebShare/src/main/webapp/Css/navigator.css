@@ -2,7 +2,20 @@
 #back_button
 {
     display:block;
+    border:1px solid #D3D3D3;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(#FAFAFA,#EAEAEA);
 }
+#back_button:hover
+{
+    border:1px solid #FF893A;
+}
+
+#back_button:active
+{
+    background: -webkit-linear-gradient(#EAEAEA,#FAFAFA);
+}
+
 
 #path
 {
@@ -11,22 +24,43 @@
 .path_item
 {
     margin-right:10px;
+    font-weight: bold;
 }
 
 .path_limit
 {
     margin-right:10px;
+    padding-top:3px;
 }
 
+.path_sep
+{
+    width:15px;
+    height:15px;
+}
 #search_bar
 {
     margin-left:10px;
     margin-top:-1px;
 }
+.tool_button
+{
+    width:28px;
+    height:28px;
+}
+
+/* files */
+
+.file_schema
+{
+    background: #FAFAFA;
+    background: -moz-linear-gradient(#FAFAFA,#EAEAEA);
+    background: -webkit-linear-gradient(#FAFAFA,#EAEAEA); 
+}
     
 .file_item
 {
-    border: 1px solid grey;
+    border-bottom: 1px solid grey;
     width:100%;
     padding-top:10px;
     padding-bottom:10px;

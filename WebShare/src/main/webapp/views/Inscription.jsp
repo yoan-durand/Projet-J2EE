@@ -15,7 +15,6 @@
             Email: <input type="text" name="email"/>
             Mot de passe: <input type="password" name="password">
             Confirmer mot de passe: <input type="password" name="confpass">
-            
             <input type="submit" value="valider">
             
         </form>

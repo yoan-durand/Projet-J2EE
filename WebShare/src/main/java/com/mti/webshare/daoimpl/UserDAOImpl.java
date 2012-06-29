@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mti.webshare.dao;
+package com.mti.webshare.daoimpl;
 
+import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
 import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserDAOHibernate implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     
     @Autowired 
     private SessionFactory sessionFactory;
@@ -47,13 +48,32 @@ public class UserDAOHibernate implements UserDAO {
     }
 
     @Override
-    public Boolean update(User user) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Boolean update(User user) 
+    {
+        try 
+        {
+            sessionFactory.getCurrentSession().update(user);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     @Override
-    public Boolean delete(User user) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Boolean delete(User user) 
+    {
+        try
+        {    
+            user.setDeleted(Boolean.TRUE);
+            update(user);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     @Override
@@ -64,13 +84,15 @@ public class UserDAOHibernate implements UserDAO {
                 return users.get(0);
             }
             return null;
-        } catch (Exception e) {
+        }
+        catch (Exception e) 
+        {
             return null;
         }
     }
 
     @Override
-    public User getByEmail(String email) {
+    public User get(String email) {
         try {
             List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.email=:userEmail").setProperties(email).list();
             if (!users.isEmpty()){

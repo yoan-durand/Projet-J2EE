@@ -17,6 +17,12 @@
 a
 {
     text-decoration:none;
+    color:#518CF2;
+}
+
+a:hover
+{
+    text-decoration:underline;
 }
 
 li , ul
@@ -26,20 +32,26 @@ li , ul
    padding:0px
 }
 
+
 body
 {
-    
+
 }
 
 #page
 {
     width:1000px;
     margin:auto;
-    
+    background: white;
+    border:1px solid #DEDEDE;
 }
 
 /*Header*/
 
+h1
+{
+    color:#FF893A;
+}
 
 /*Menu*/
 #menu

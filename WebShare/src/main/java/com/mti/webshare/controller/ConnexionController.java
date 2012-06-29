@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/index")
-public class IndexController 
+public class ConnexionController 
 {
     @Autowired
     private UserDAO userDao;
@@ -41,7 +41,7 @@ public class IndexController
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         
-        User user = userDao.getByEmail(login);
+        User user = userDao.get(login);
         
         if (user != null)
         {

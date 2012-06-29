@@ -6,11 +6,8 @@ package com.mti.webshare.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -41,6 +38,13 @@ public class User
     
     @Column(name="deleted")
     private Boolean deleted;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "event", 
+                joinColumns = { @JoinColumn(name = "id") }, 
+                inverseJoinColumns = { @JoinColumn(name = "user_id") })
+    private List<Event> eventList;
+
 
     public Boolean getDeleted()
     {
@@ -102,6 +106,13 @@ public class User
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-    
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
     
 }
