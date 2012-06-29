@@ -6,6 +6,7 @@ package com.mti.webshare.dao;
 
 import com.mti.webshare.model.User;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 
 import org.hibernate.SessionFactory;
@@ -80,8 +81,8 @@ public class UserDAOHibernate implements UserDAO {
     {
         try
         {
-           Query q = sessionFactory.getCurrentSession().createQuery("from User u where u.email= :email");
-           q.setString(":email", email);
+           Query q = sessionFactory.getCurrentSession().createQuery("from User where email = ?");
+           q.setParameter(0, email, Hibernate.STRING);
            
            User user = (User) q.uniqueResult();
            return user;
