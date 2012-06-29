@@ -41,11 +41,20 @@ public class FileController {
         
             List<File> list_file_bdd = fileDAO.getList();
             List<FileView> list_file_item = new ArrayList<FileView> ();
-            
-            for(Iterator<File> it = list_file_bdd.iterator (); it.hasNext ();)
+           /* Iterator it = list_file_bdd.iterator ();
+            while(it.hasNext ())
             {
                   FileView file = new FileView ();
-                  file.convert((File)it.next());
+                  File toto = (File)it.next();
+                  file.convert(toto);
+                  list_file_item.add(file);
+            }*/
+            
+            for (int i = 0; i < list_file_bdd.size(); i++)
+            {
+                   FileView file = new FileView ();
+                   File toto = list_file_bdd.get(i);
+                   file.convert(toto);
                   list_file_item.add(file);
             }
             
