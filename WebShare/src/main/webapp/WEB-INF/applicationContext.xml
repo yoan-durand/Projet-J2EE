@@ -12,10 +12,13 @@
     <!-- Database -->
     <bean id="mydataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/WebShare"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/WebShare"/>
         <property name="username" value="root"/>
         <property name="password" value=""/>
     </bean>
+    
+    
+    
     
     <!-- Persistence -->
     <bean id="mySessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -23,11 +26,19 @@
         <property name="packagesToScan" value="com.mti.webshare.model"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="use_sql_comments">true</prop>
                 <!--<prop key="hibernate.hbm2ddl.auto">create</prop>--> <!-- Uncomment on first execution to create the tables automatically. It will drop-create each time, so only the first time -->
             </props>
+            
         </property>
+        
+        
+        <!--<property name="hibernate.format_sql">true</property>-->
+        <!--<property name="use_sql_comments">true</property>-->
+        
     </bean>
     
     <!-- Transactionnal -->

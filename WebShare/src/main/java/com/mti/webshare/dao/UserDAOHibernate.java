@@ -28,12 +28,14 @@ public class UserDAOHibernate implements UserDAO {
         {
             User user = new User();
             user.setLastname(lastName);
-            user.setFisrtname(fisrtName);
+            user.setFirstname(fisrtName);
             user.setEmail(email);
             user.setPassword(password);
             user.setDeleted(Boolean.FALSE);
         
+           
             sessionFactory.getCurrentSession().save(user);
+
             return (true);
         }
         catch (Exception e)

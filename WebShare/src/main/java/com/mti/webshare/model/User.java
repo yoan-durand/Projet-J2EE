@@ -6,9 +6,11 @@ package com.mti.webshare.model;
 
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -18,13 +20,26 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table (name="user")
 public class User
 {
+    @Id
+    @GeneratedValue
     private int id;
+    
+    @Column(name="lastname")
     private String lastname;
-    private String fisrtname;
+    
+    @Column(name="firstname")
+    private String firstname;
+    
+    @Column(name="password")
     private String password;
+    
+    @Column(name="email")
     private String email;
+    
+    @Column(name="deleted")
     private Boolean deleted;
 
     public Boolean getDeleted()
@@ -57,8 +72,7 @@ public class User
         this.password = password;
     }
     
-    @Id
-    @GeneratedValue
+    
     public int getId() 
     {
         return id;
@@ -69,13 +83,17 @@ public class User
         this.id = id;
     }
 
-    public String getFisrtname() {
-        return fisrtname;
+    public String getFirstname()
+    {
+        return firstname;
     }
 
-    public void setFisrtname(String fisrtname) {
-        this.fisrtname = fisrtname;
+    public void setFirstname(String firstname)
+    {
+        this.firstname = firstname;
     }
+
+    
 
     public String getLastname() {
         return lastname;

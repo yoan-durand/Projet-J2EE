@@ -128,7 +128,7 @@
     </dependencies>
 
 	<build>
-		<finalName>shop</finalName>
+		<finalName>WebShare</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
