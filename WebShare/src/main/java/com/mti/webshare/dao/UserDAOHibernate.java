@@ -5,7 +5,11 @@
 package com.mti.webshare.dao;
 
 import com.mti.webshare.model.User;
+import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,7 +34,7 @@ public class UserDAOHibernate implements UserDAO {
             user.setLastname(lastName);
             user.setFirstname(fisrtName);
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(Encryptor.getEncodedPassword(password));
             user.setDeleted(Boolean.FALSE);
         
            
@@ -92,5 +96,5 @@ public class UserDAOHibernate implements UserDAO {
             System.out.println(e.getMessage());
             return null;
         }
-    }
+    }    
 }

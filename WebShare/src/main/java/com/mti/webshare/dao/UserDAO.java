@@ -22,5 +22,4 @@ public interface UserDAO
     public User get (int id);
     public User getByEmail (String email);
     public List<User> getList ();
-    
 }
