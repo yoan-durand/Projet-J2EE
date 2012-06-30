@@ -3,11 +3,15 @@ package com.mti.webshare.controller;
 import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
@@ -79,6 +83,38 @@ public class FileController {
             }
         }
         return new ModelAndView("navigator");
+    }
+    
+    
+    @RequestMapping(value = "/download.htm", method = RequestMethod.GET)
+    public void download_get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String filename = request.getSession().getServletContext().getInitParameter("serverLocation")+"TP3-Spring.pdf";
+        response.setContentType("application/octet-stream");
+        String disHeader = "Attachment; Filename=\"TP3-spring\"";
+        response.setHeader("Content-Disposition", disHeader);
+        java.io.File fileToDownload = new java.io.File(filename);
+
+        InputStream in = null;
+        ServletOutputStream outs = response.getOutputStream();
+
+        try
+        {
+            in = new BufferedInputStream(new FileInputStream(fileToDownload));
+            int ch;
+            while ((ch = in.read()) != -1)
+            {
+                outs.print((char) ch);
+            }
+        }
+        finally
+        {
+            if (in != null) in.close(); // very important
+        }
+
+        outs.flush();
+        outs.close();
+        in.close();
     }
 
 }
