@@ -6,6 +6,7 @@ package com.mti.webshare.model;
 
 
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 
@@ -44,6 +45,22 @@ public class FileUploaded
                 joinColumns = { @JoinColumn(name = "id") }, 
                 inverseJoinColumns = { @JoinColumn(name = "file_id") })
     private List<Event> eventList;
+    
+    @ManyToMany(
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+        mappedBy = "files",
+        targetEntity = User.class,
+        fetch= FetchType.EAGER
+    )
+    private List<User> users;
+    
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public Boolean getDeleted() {
         return deleted;

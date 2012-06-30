@@ -27,7 +27,8 @@ public class UserDAOImpl implements UserDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String lastName, String fisrtName, String password, String email) {
+    public Boolean create(String lastName, String fisrtName, String password, String email)
+    {
         try
         {
             User user = new User();
@@ -36,7 +37,6 @@ public class UserDAOImpl implements UserDAO {
             user.setEmail(email);
             user.setPassword(Encryptor.getEncodedPassword(password));
             user.setDeleted(Boolean.FALSE);
-        
            
             sessionFactory.getCurrentSession().save(user);
 
@@ -79,13 +79,15 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User get(int id) {
-        try {
+    public User get(int id)
+    {
+        try
+        {
             Integer userId = id;
-           Query q = sessionFactory.getCurrentSession().createSQLQuery("from User wher id = ?");
-           q.setParameter(0, userId.toString() , Hibernate.STRING);
+            Query q = sessionFactory.getCurrentSession().createSQLQuery("from User wher id = ?");
+            q.setParameter(0, userId.toString() , Hibernate.STRING);
            
-           User user = (User) q.uniqueResult();
+            User user = (User) q.uniqueResult();
             return null;
         }
         catch (Exception e) 
@@ -95,25 +97,31 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User get(String email) {
-        try {
+    public User get(String email)
+    {
+        try
+        {
             Query q = sessionFactory.getCurrentSession().createQuery("from User  where email = ?");
             q.setParameter(0, email, Hibernate.STRING);
             
             return (User) q.uniqueResult();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return null;
         }
     }
 
     @Override
-    public List<User> getList() {
-        
-        try {
+    public List<User> getList()
+    {   
+        try
+        {
             List<User> users = sessionFactory.getCurrentSession().createQuery("from User order by id").list();
-        
             return users;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }

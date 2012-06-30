@@ -44,7 +44,26 @@ public class User
                 joinColumns = { @JoinColumn(name = "id") }, 
                 inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private List<Event> eventList;
+    
+    @ManyToMany(
+        targetEntity=FileUploaded.class,
+        cascade={CascadeType.PERSIST, CascadeType.MERGE},
+        fetch= FetchType.EAGER
+    )
+    @JoinTable(
+        name="user_has_right_to_file",
+        joinColumns=@JoinColumn(name="user_id"),
+        inverseJoinColumns=@JoinColumn(name="file_id")
+    )
+    private List<FileUploaded> files;
+    
+    public List<FileUploaded> getFiles() {
+        return files;
+    }
 
+    public void setFiles(List<FileUploaded> files) {
+        this.files = files;
+    }
 
     public Boolean getDeleted()
     {

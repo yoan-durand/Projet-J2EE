@@ -3,6 +3,7 @@ package com.mti.webshare.controller;
 import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
+import com.mti.webshare.model.User;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -115,6 +116,13 @@ public class FileController {
         outs.flush();
         outs.close();
         in.close();
+    }
+    
+    @RequestMapping(value = "/myDirectory.htm", method = RequestMethod.GET)
+    public ModelAndView user_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        User user = (User)request.getSession().getAttribute("user");
+        return new ModelAndView("MyDirectory", "user", user);
     }
     
     @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)
