@@ -44,11 +44,6 @@ public class FileController {
             return new ModelAndView("navigator", "file_list", list_file_item);
     }
     
-    @RequestMapping("/other.htm")
-    public ModelAndView other() {
-        return new ModelAndView("addShop", "message", "Remove method called");
-    }
-    
     @RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
     public ModelAndView upload_get() throws ServletException, IOException
     {
@@ -78,7 +73,7 @@ public class FileController {
                 else
                 {
                     String itemName = item.getName();
-                    java.io.File savedFile = new java.io.File(request.getSession().getServletContext().getRealPath("/")+itemName);//+"uploadedFiles/"
+                    java.io.File savedFile = new java.io.File(request.getSession().getServletContext().getInitParameter("serverLocation")+itemName);
                     item.write(savedFile);
                 }
             }
