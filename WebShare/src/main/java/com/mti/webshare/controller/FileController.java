@@ -116,6 +116,12 @@ public class FileController {
         outs.close();
         in.close();
     }
+    
+    @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)
+    public void create_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        
+    }
 
 }
 

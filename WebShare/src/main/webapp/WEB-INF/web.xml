@@ -13,7 +13,7 @@
     
     <context-param>
         <param-name>serverLocation</param-name>
-        <param-value>/home/yoan/project/ING2/JAVA/Projet-J2EE/WebShare/uploadedFiles/</param-value>
+        <param-value>/home/vince/Documents/Projets/Projet-J2EE/WebShare/uploadedFiles/</param-value>
     </context-param>
     
     <servlet>
