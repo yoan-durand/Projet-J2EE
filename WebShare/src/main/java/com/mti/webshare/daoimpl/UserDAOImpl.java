@@ -8,6 +8,8 @@ import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
 import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -79,10 +81,11 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User get(int id) {
         try {
-            List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.id=:userId").setProperties(id).list();
-            if (!users.isEmpty()){
-                return users.get(0);
-            }
+            Integer userId = id;
+           Query q = sessionFactory.getCurrentSession().createSQLQuery("from User wher id = ?");
+           q.setParameter(0, userId.toString() , Hibernate.STRING);
+           
+           User user = (User) q.uniqueResult();
             return null;
         }
         catch (Exception e) 
@@ -94,11 +97,10 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User get(String email) {
         try {
-            List<User> users = sessionFactory.getCurrentSession().createSQLQuery("select u from user where u.email=:userEmail").setProperties(email).list();
-            if (!users.isEmpty()){
-                return users.get(0);
-            }
-            return null;
+            Query q = sessionFactory.getCurrentSession().createQuery("from User  where email = ?");
+            q.setParameter(0, email, Hibernate.STRING);
+            
+            return (User) q.uniqueResult();
         } catch (Exception e) {
             return null;
         }
