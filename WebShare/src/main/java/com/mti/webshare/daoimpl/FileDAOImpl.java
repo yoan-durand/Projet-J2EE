@@ -7,6 +7,8 @@ package com.mti.webshare.daoimpl;
 
 import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.model.FileUploaded;
+import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class FileDAOImpl implements FileDAO
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir)
+    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user)
     {
         try
         {
@@ -40,7 +42,15 @@ public class FileDAOImpl implements FileDAO
             file.setName(name);
             file.setPath(path);
             
+            UserFile userfile = new UserFile();
+            userfile.setFile(file);
+            userfile.setUser(user);
+            userfile.setState(Boolean.TRUE);
+
+            file.getUserFile().add(userfile);
+ 
             sessionFactory.getCurrentSession().save(file);
+            sessionFactory.getCurrentSession().save(userfile);
             return true;
         }
         catch (Exception e)

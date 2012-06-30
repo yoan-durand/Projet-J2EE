@@ -6,8 +6,10 @@ package com.mti.webshare.daoimpl;
 
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
 import com.mti.webshare.utilitaire.Encryptor;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -21,7 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO
+{
     
     @Autowired 
     private SessionFactory sessionFactory;
@@ -88,7 +91,7 @@ public class UserDAOImpl implements UserDAO {
             q.setParameter(0, userId.toString() , Hibernate.STRING);
            
             User user = (User) q.uniqueResult();
-            return null;
+            return user;
         }
         catch (Exception e) 
         {
@@ -125,5 +128,24 @@ public class UserDAOImpl implements UserDAO {
             System.out.println(e.getMessage());
             return null;
         }
-    }    
+    }
+    
+    @Override
+    public Set<UserFile> getUserFile(String userMail)
+    {
+        try
+        {
+            Query q = sessionFactory.getCurrentSession().createQuery("from User  where email = ?");
+            q.setParameter(0, userMail, Hibernate.STRING);
+
+            User nuser =  (User) q.uniqueResult();
+            sessionFactory.getCurrentSession().persist(nuser);
+            Set<UserFile> userfile = nuser.getUserFile();
+            return userfile;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 }

@@ -1,9 +1,10 @@
 package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.FileDAO;
+import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
-import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,9 @@ public class FileController {
     
     @Autowired
     private FileDAO fileDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping("/navigator.htm")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
@@ -121,8 +126,9 @@ public class FileController {
     @RequestMapping(value = "/myDirectory.htm", method = RequestMethod.GET)
     public ModelAndView user_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        User user = (User)request.getSession().getAttribute("user");
-        return new ModelAndView("MyDirectory", "user", user);
+        String userMail = (String)request.getSession().getAttribute("user");
+        Set<UserFile> userfiles = userDAO.getUserFile(userMail);
+        return new ModelAndView("MyDirectory", "userfiles", userfiles);
     }
     
     @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)

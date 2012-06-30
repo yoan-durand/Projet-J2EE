@@ -23,8 +23,8 @@
             <h1 class="float-left">Web Share</h1>
             <div id="connect_zone" class="float-right">
                 <strong > Bienvenue
-                    <% User user = (User)request.getSession().getAttribute("user");
-                          out.print(user.getFirstname()+" "+ user.getLastname());%>
+                    <% /*User user = (User)request.getSession().getAttribute("user");
+                          out.print(user.getFirstname()+" "+ user.getLastname());*/%>
                 </strong>
                 <img src="down_arrow" alt="pick"/>
             </div> 

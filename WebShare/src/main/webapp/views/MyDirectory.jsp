@@ -10,8 +10,8 @@
     <body>
         <h1>Mes dossiers</h1>
         <ul>
-            <c:forEach  var="file" items="${user.getFiles()}">
-                <li>${file.getName()}</li>
+            <c:forEach  var="userfile" items="${userfiles}">
+                <li>${userfile.getFile().getName()}</li>
             </c:forEach>
         </ul>
     </body>

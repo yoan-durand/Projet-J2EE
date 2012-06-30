@@ -6,7 +6,9 @@ package com.mti.webshare.model;
 
 
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -18,7 +20,7 @@ import javax.persistence.*;
 
 @Entity
 @Table (name="user")
-public class User
+public class User implements Serializable
 {
     @Id
     @GeneratedValue
@@ -39,30 +41,17 @@ public class User
     @Column(name="deleted")
     private Boolean deleted;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "event", 
-                joinColumns = { @JoinColumn(name = "id") }, 
-                inverseJoinColumns = { @JoinColumn(name = "user_id") })
-    private List<Event> eventList;
-    
-    @ManyToMany(
-        targetEntity=FileUploaded.class,
-        cascade={CascadeType.PERSIST, CascadeType.MERGE},
-        fetch= FetchType.EAGER
-    )
-    @JoinTable(
-        name="user_has_right_to_file",
-        joinColumns=@JoinColumn(name="user_id"),
-        inverseJoinColumns=@JoinColumn(name="file_id")
-    )
-    private List<FileUploaded> files;
-    
-    public List<FileUploaded> getFiles() {
-        return files;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade= CascadeType.ALL)
+    private Set<UserFile> userFile = new HashSet<UserFile>(0);
+
+    public Set<UserFile> getUserFile()
+    {
+        return userFile;
     }
 
-    public void setFiles(List<FileUploaded> files) {
-        this.files = files;
+    public void setUserFile(Set<UserFile> userFile)
+    {
+        this.userFile = userFile;
     }
 
     public Boolean getDeleted()
@@ -126,12 +115,12 @@ public class User
         this.lastname = lastname;
     }
 
-    public List<Event> getEventList() {
+    /*public List<Event> getEventList() {
         return eventList;
     }
 
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
-    }
+    }*/
     
 }

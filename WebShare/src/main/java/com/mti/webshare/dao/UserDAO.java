@@ -6,7 +6,9 @@ package com.mti.webshare.dao;
 
 
 import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
 import java.util.List;
+import java.util.Set;
 
 
 
@@ -22,4 +24,5 @@ public interface UserDAO
     public User get (int id);
     public User get (String email);
     public List<User> getList ();
+    public Set<UserFile> getUserFile(String userMail);
 }

@@ -47,7 +47,7 @@ public class ConnexionController
         {
             if (user.getPassword().equals(Encryptor.getEncodedPassword(password)))
             {
-                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("user", user.getEmail());
                 return new ModelAndView("navigator");
             }
             else
