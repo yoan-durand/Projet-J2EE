@@ -1,18 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author vince
- */
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.FileDAO;
