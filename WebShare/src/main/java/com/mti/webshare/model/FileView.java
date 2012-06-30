@@ -71,7 +71,7 @@ public class FileView
         this.visibility = visibility;
     }
     
-    public void convert (File init_file)
+    public void convert (FileUploaded init_file)
     {
         this.id = init_file.getId();
         this.name = init_file.getName();

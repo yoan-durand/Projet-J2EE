@@ -18,7 +18,7 @@ import javax.persistence.*;
 
 @Entity
 @Table (name="file")
-public class File
+public class FileUploaded
 {
     @Id
     @GeneratedValue
@@ -100,4 +100,5 @@ public class File
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
     }
+    
 }

@@ -16,7 +16,7 @@
 package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.FileDAO;
-import com.mti.webshare.model.File;
+import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,13 +46,13 @@ public class FileController {
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            List<File> list_file_bdd = fileDAO.getList();
+            List<FileUploaded> list_file_bdd = fileDAO.getList();
             List<FileView> list_file_item = new ArrayList<FileView> ();
             
-            for(Iterator<File> it = list_file_bdd.iterator (); it.hasNext ();)
+            for(Iterator<FileUploaded> it = list_file_bdd.iterator (); it.hasNext ();)
             {
                   FileView file = new FileView ();
-                  file.convert((File)it.next());
+                  file.convert((FileUploaded)it.next());
                   list_file_item.add(file);
             }
             

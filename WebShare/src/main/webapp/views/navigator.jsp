@@ -3,7 +3,7 @@
     Created on : Jun 28, 2012, 3:14:21 AM
     Author     : vince
 --%>
-
+<%@page import="com.mti.webshare.model.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -22,8 +22,12 @@
             <%@ include file="/WEB-INF/jsp/include.jsp" %>
             <h1 class="float-left">Web Share</h1>
             <div id="connect_zone" class="float-right">
-                <strong > Bienvenue LOGIN </strong><img src="down_arrow" alt="pick"/>
-            </div>
+                <strong > Bienvenue
+                    <% User user = (User)request.getSession().getAttribute("user");
+                          out.print(user.getFirstname()+" "+ user.getLastname());%>
+                </strong>
+                <img src="down_arrow" alt="pick"/>
+            </div> 
             <ul id="menu" class="clear">
                 <li class="menu_item float-left">
                     <a href=""> Navigation </a>
