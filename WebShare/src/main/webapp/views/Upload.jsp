@@ -11,8 +11,6 @@
             <ul>
                 <li><input name="file" type="file" id="file"></li>
                 <li><input name="file" type="file" id="file"></li>
-                <li><input name="file" type="file" id="file"></li>
-                <li><input name="file" type="file" id="file"></li>
             </ul>
             <input type="submit" name="Submit" value="Submit files"/>
         </form>

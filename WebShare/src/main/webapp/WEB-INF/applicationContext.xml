@@ -18,8 +18,6 @@
     </bean>
     
     
-    
-    
     <!-- Persistence -->
     <bean id="mySessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="mydataSource"/>
