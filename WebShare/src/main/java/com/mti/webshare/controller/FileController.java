@@ -4,15 +4,13 @@ import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
+import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +48,12 @@ public class FileController {
                   list_file_item.add(file);
             }
             
-            return new ModelAndView("navigator", "file_list", list_file_item);
+            Map<String, Object> view = new HashMap<String, Object>();
+            User user = userDAO.get((String)request.getSession().getAttribute("user"));
+            view.put("User", user);
+            view.put("file_list", list_file_item);
+            
+            return new ModelAndView("navigator", "view", view);
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.GET)

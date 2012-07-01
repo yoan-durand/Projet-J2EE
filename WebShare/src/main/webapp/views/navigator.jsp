@@ -22,9 +22,7 @@
             <%@ include file="/WEB-INF/jsp/include.jsp" %>
             <h1 class="float-left">Web Share</h1>
             <div id="connect_zone" class="float-right">
-                <strong > Bienvenue
-                    <% /*User user = (User)request.getSession().getAttribute("user");
-                          out.print(user.getFirstname()+" "+ user.getLastname());*/%>
+                <strong > Bienvenue ${view.get("User").getFirstname()} ${view.get("User").getLastname()}
                 </strong>
                 <img src="down_arrow" alt="pick"/>
             </div> 
