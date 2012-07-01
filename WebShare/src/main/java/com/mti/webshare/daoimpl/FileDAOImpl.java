@@ -10,6 +10,7 @@ import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -110,13 +111,10 @@ public class FileDAOImpl implements FileDAO
     {
         try 
         {
-            List<FileUploaded> file = sessionFactory.getCurrentSession().createSQLQuery("select * from file").list();
+            Query q = sessionFactory.getCurrentSession().createQuery("from FileUploaded");  
+            List<FileUploaded> files = q.list();
             
-            if (!file.isEmpty())
-            {
-                return file;
-            }
-            return null;
+            return files;
         }
         catch (Exception e) 
         {

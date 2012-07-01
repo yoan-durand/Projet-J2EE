@@ -44,10 +44,9 @@ public class FileController {
             List<FileUploaded> list_file_bdd = fileDAO.getList();
             List<FileView> list_file_item = new ArrayList<FileView> ();
             
-            for(Iterator<FileUploaded> it = list_file_bdd.iterator (); it.hasNext ();)
+            for(FileUploaded file_bdd : list_file_bdd)
             {
-                  FileView file = new FileView ();
-                  file.convert((FileUploaded)it.next());
+                  FileView file = new FileView(file_bdd);
                   list_file_item.add(file);
             }
             
