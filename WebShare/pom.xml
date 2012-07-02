@@ -128,7 +128,8 @@
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.2</version>
+                <version>1.2.1</version>
+                  <type>jar</type>
             </dependency>
             
             <dependency>
@@ -136,7 +137,18 @@
                 <artifactId>commons-io</artifactId>
                 <version>1.4</version>
             </dependency>
-
+            
+            <!-- WebService -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>2.2.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>2.2.10</version>
+            </dependency>
     </dependencies>
 
 	<build>
