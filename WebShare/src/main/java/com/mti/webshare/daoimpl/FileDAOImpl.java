@@ -6,8 +6,11 @@
 package com.mti.webshare.daoimpl;
 
 import com.mti.webshare.dao.FileDAO;
-import com.mti.webshare.model.File;
+import com.mti.webshare.model.FileUploaded;
+import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,11 +31,11 @@ public class FileDAOImpl implements FileDAO
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir)
+    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user)
     {
         try
         {
-            File file = new File();
+            FileUploaded file = new FileUploaded();
             
             file.setDeleted(Boolean.FALSE);
             file.setIsDir(isDir);
@@ -40,7 +43,15 @@ public class FileDAOImpl implements FileDAO
             file.setName(name);
             file.setPath(path);
             
+            UserFile userfile = new UserFile();
+            userfile.setFile(file);
+            userfile.setUser(user);
+            userfile.setState(Boolean.TRUE);
+
+            file.getUserFile().add(userfile);
+ 
             sessionFactory.getCurrentSession().save(file);
+            sessionFactory.getCurrentSession().save(userfile);
             return true;
         }
         catch (Exception e)
@@ -50,7 +61,7 @@ public class FileDAOImpl implements FileDAO
     }
 
     @Override
-    public Boolean update(File file)
+    public Boolean update(FileUploaded file)
     {
         try
         {
@@ -64,7 +75,7 @@ public class FileDAOImpl implements FileDAO
     }
     
     @Override
-    public Boolean deleted(File file)
+    public Boolean deleted(FileUploaded file)
     {
         try
         {
@@ -79,10 +90,10 @@ public class FileDAOImpl implements FileDAO
     }
 
     @Override
-    public File get(int id)
+    public FileUploaded get(int id)
     {
         try {
-            List<File> file = sessionFactory.getCurrentSession().createSQLQuery("select f from file where f.id=:fileId").setProperties(id).list();
+            List<FileUploaded> file = sessionFactory.getCurrentSession().createSQLQuery("select f from file where f.id=:fileId").setProperties(id).list();
             if (!file.isEmpty())
             {
                 return file.get(0);
@@ -96,17 +107,14 @@ public class FileDAOImpl implements FileDAO
     }
 
     @Override
-    public List<File> getList()
+    public List<FileUploaded> getList()
     {
         try 
         {
-            List<File> file = sessionFactory.getCurrentSession().createSQLQuery("select * from file").list();
+            Query q = sessionFactory.getCurrentSession().createQuery("from FileUploaded");  
+            List<FileUploaded> files = q.list();
             
-            if (!file.isEmpty())
-            {
-                return file;
-            }
-            return null;
+            return files;
         }
         catch (Exception e) 
         {

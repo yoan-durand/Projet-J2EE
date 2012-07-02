@@ -1,28 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author vince
- */
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mti.webshare.controller;
 
 import com.mti.webshare.dao.FileDAO;
-import com.mti.webshare.model.File;
+import com.mti.webshare.dao.UserDAO;
+import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
+import com.mti.webshare.model.User;
+import com.mti.webshare.model.UserFile;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.io.InputStream;
+import java.util.*;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
@@ -41,36 +31,29 @@ public class FileController {
     
     @Autowired
     private FileDAO fileDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping("/navigator.htm")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            List<File> list_file_bdd = fileDAO.getList();
+            List<FileUploaded> list_file_bdd = fileDAO.getList();
             List<FileView> list_file_item = new ArrayList<FileView> ();
-           /* Iterator it = list_file_bdd.iterator ();
-            while(it.hasNext ())
-            {
-                  FileView file = new FileView ();
-                  File toto = (File)it.next();
-                  file.convert(toto);
-                  list_file_item.add(file);
-            }*/
             
-            for (int i = 0; i < list_file_bdd.size(); i++)
+            for(FileUploaded file_bdd : list_file_bdd)
             {
-                   FileView file = new FileView ();
-                   File toto = list_file_bdd.get(i);
-                   file.convert(toto);
+                  FileView file = new FileView(file_bdd);
                   list_file_item.add(file);
             }
             
-            return new ModelAndView("navigator", "file_list", list_file_item);
-    }
-    
-    @RequestMapping("/other.htm")
-    public ModelAndView other() {
-        return new ModelAndView("addShop", "message", "Remove method called");
+            Map<String, Object> view = new HashMap<String, Object>();
+            User user = userDAO.get((String)request.getSession().getAttribute("user"));
+            view.put("User", user);
+            view.put("file_list", list_file_item);
+            
+            return new ModelAndView("navigator", "view", view);
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.GET)
@@ -102,12 +85,58 @@ public class FileController {
                 else
                 {
                     String itemName = item.getName();
-                    java.io.File savedFile = new java.io.File(request.getSession().getServletContext().getRealPath("/")+itemName);//+"uploadedFiles/"
+                    java.io.File savedFile = new java.io.File(request.getSession().getServletContext().getInitParameter("serverLocation")+itemName);
                     item.write(savedFile);
                 }
             }
         }
         return new ModelAndView("navigator");
+    }
+    
+    
+    @RequestMapping(value = "/download.htm", method = RequestMethod.GET)
+    public void download_get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String filename = request.getSession().getServletContext().getInitParameter("serverLocation")+"TP3-Spring.pdf";
+        response.setContentType("application/octet-stream");
+        String disHeader = "Attachment; Filename=\"TP3-spring\"";
+        response.setHeader("Content-Disposition", disHeader);
+        java.io.File fileToDownload = new java.io.File(filename);
+
+        InputStream in = null;
+        ServletOutputStream outs = response.getOutputStream();
+
+        try
+        {
+            in = new BufferedInputStream(new FileInputStream(fileToDownload));
+            int ch;
+            while ((ch = in.read()) != -1)
+            {
+                outs.print((char) ch);
+            }
+        }
+        finally
+        {
+            if (in != null) in.close(); // very important
+        }
+
+        outs.flush();
+        outs.close();
+        in.close();
+    }
+    
+    @RequestMapping(value = "/myDirectory.htm", method = RequestMethod.GET)
+    public ModelAndView user_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String userMail = (String)request.getSession().getAttribute("user");
+        Set<UserFile> userfiles = userDAO.getUserFile(userMail);
+        return new ModelAndView("MyDirectory", "userfiles", userfiles);
+    }
+    
+    @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)
+    public void create_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        
     }
 
 }

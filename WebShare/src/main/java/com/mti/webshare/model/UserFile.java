@@ -4,75 +4,90 @@
  */
 package com.mti.webshare.model;
 
-
-
-import java.sql.Date;
+import java.io.Serializable;
 import javax.persistence.*;
-
-/**
- *
- * @author yoan
- * EPITA MTI 2013
- * 
- */
 
 @Entity
 @Table (name="user_has_right_to_file")
-public class UserFile
+@AssociationOverrides({
+		@AssociationOverride(name = "pk.file", 
+			joinColumns = @JoinColumn(name = "file_id")),
+		@AssociationOverride(name = "pk.user", 
+			joinColumns = @JoinColumn(name = "user_id")) })
+public class UserFile implements Serializable
 {
-    @Id
-    @GeneratedValue
-    private int id;
+    @EmbeddedId
+    private UserFileId pk = new UserFileId();
     
-    @Column(name="action")
-    private int eventAction;
+    @Column(name="state")
+    private Boolean state;
+
+    public UserFile()
+    {
+    }
     
-    @Column(name="user_id")
-    private int user_id;
+    @Transient
+    public User getUser()
+    {
+        return getPk().getUser();
+    }
+
+    public void setUser(User user)
+    {
+        getPk().setUser(user);
+    }
+
+    @Transient
+    public FileUploaded getFile()
+    {
+        return getPk().getFile();
+    }
+
+    public void setFile(FileUploaded file)
+    {
+        getPk().setFile(file);
+    }
     
-    @Column(name="file_id")
-    private int file_id;
+    public UserFileId getPk()
+    {
+        return pk;
+    }
+
+    public void setPk(UserFileId pk)
+    {
+        this.pk = pk;
+    }
+
+    public Boolean getState()
+    {
+        return state;
+    }
+
+    public void setState(Boolean state)
+    {
+        this.state = state;
+    }
     
-    @Column(name="date")
-    private Date eventDate;
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+                return true;
+        if (o == null || getClass() != o.getClass())
+                return false;
 
-    public int getEventAction() {
-        return eventAction;
+        UserFile that = (UserFile) o;
+
+        if (getPk() != null ? !getPk().equals(that.getPk())
+                        : that.getPk() != null)
+                return false;
+
+        return true;
     }
-
-    public void setEventAction(int eventAction) {
-        this.eventAction = eventAction;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public int getFile_id() {
-        return file_id;
-    }
-
-    public void setFile_id(int file_id) {
-        this.file_id = file_id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+ 
+    @Override
+    public int hashCode()
+    {
+        return (getPk() != null ? getPk().hashCode() : 0);
     }
 }

@@ -18,7 +18,7 @@ CREATE  TABLE IF NOT EXISTS `WebShare`.`user` (
   `lastname` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
   `deleted` TINYINT(1) NOT NULL ,
-  PRIMARY KEY (`id`) ,
+  PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB;
 
@@ -35,8 +35,8 @@ CREATE  TABLE IF NOT EXISTS `WebShare`.`file` (
   `path` VARCHAR(255) NOT NULL ,
   `isDir` TINYINT(1) NOT NULL ,
   `deleted` TINYINT(1) NOT NULL ,
-  `parent_id` INT NOT NULL ,
-  PRIMARY KEY (`id`, `parent_id`) ,
+  `parent_id` INT NULL,
+  PRIMARY KEY (`id`) ,
   UNIQUE INDEX `path_UNIQUE` (`path` ASC) ,
   INDEX `fk_file_file1` (`parent_id` ASC) ,
   CONSTRAINT `fk_file_file1`

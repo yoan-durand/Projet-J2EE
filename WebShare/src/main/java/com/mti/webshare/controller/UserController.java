@@ -2,9 +2,9 @@ package com.mti.webshare.controller;
 
 
 import com.mti.webshare.dao.EventDAO;
+import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,8 @@ public class UserController
         private UserDAO userDAO;
         @Autowired
         private EventDAO eventDAO;
-        
+        @Autowired
+        private FileDAO fileDAO;
         
         @RequestMapping(value="/Utilisateurs.htm", method = RequestMethod.GET)
 	public ModelAndView utilisateurs()
@@ -54,7 +55,19 @@ public class UserController
                    return new ModelAndView("addShop", "message", "Different passwords"); 
                 }
                 if (userDAO.create(lastname, firstname, password, email)){
-                    return new ModelAndView("addShop", "message", "SUCCESS");
+                    try
+                    {
+                        boolean isCreated = new java.io.File(request.getSession().getServletContext().getInitParameter("serverLocation")+email).mkdir();
+                        if (isCreated)
+                        {
+                            fileDAO.create(email, false, request.getSession().getServletContext().getInitParameter("serverLocation")+email, true, userDAO.get(email));
+                            return new ModelAndView("addShop", "message", "SUCCESS");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        return new ModelAndView("addShop", "message", e.getMessage());
+                    }
                 }
                 return new ModelAndView("addShop", "message", "FAIL");
             }

@@ -5,7 +5,8 @@
 
 package com.mti.webshare.dao;
 
-import com.mti.webshare.model.File;
+import com.mti.webshare.model.FileUploaded;
+import com.mti.webshare.model.User;
 import java.util.List;
 
 
@@ -20,9 +21,9 @@ import java.util.List;
 
 public interface FileDAO 
 {
-    public Boolean create (String name, Boolean ispublic, String path, Boolean isDir);
-    public Boolean update (File file);
-    public Boolean deleted (File file);
-    public File get(int id);
-    public List<File> getList ();
+    public Boolean create (String name, Boolean ispublic, String path, Boolean isDir, User user);
+    public Boolean update (FileUploaded file);
+    public Boolean deleted (FileUploaded file);
+    public FileUploaded get(int id);
+    public List<FileUploaded> getList ();
 }

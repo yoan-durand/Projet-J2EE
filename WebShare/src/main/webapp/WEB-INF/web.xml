@@ -11,6 +11,11 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
+    <context-param>
+        <param-name>serverLocation</param-name>
+        <param-value>/home/vince/Documents/Projets/Projet-J2EE/WebShare/uploadedFiles/</param-value>
+    </context-param>
+    
     <servlet>
         <servlet-name>webshare</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
