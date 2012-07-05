@@ -41,18 +41,16 @@ public class WebService implements IWebService{
         return a+b;
     }
 
-    @GET
-    @Path("/adduser/{lastname}/{firstname}/{email}/{password}")
-    @Produces("text/plain")
+    
     @Override
-    public String addUser(@PathParam("lastname") String lastName, @PathParam("firstname") String firstName, @PathParam("email") String email,
-    @PathParam("password") String password)
+    public String addUser(String lastName, String firstName, String email, String password)
     {
         String str = " ";
 
        if(userDAO.create(lastName, firstName, password, email))
-        str = lastName +" "+firstName+" "+email+" "+password;  
-        return (str);   
+            str = lastName +" "+firstName+" "+email+" "+password;  
+        
+       return (str);   
     }
 
     

@@ -23,8 +23,11 @@ public interface IWebService
 
     
     @WebMethod
-    public String addUser(@WebParam(name="lastname") String lastName, @WebParam(name="firstname") String firstName, @WebParam(name="email") String email,
-    @WebParam(name="password")String password);
+    @GET
+    @Path("/adduser/{lastname}/{firstname}/{email}/{password}")
+    @Produces("text/plain")
+    public String addUser(@WebParam(name="lastname") @PathParam("lastname")  String lastName, @WebParam(name="firstname") @PathParam("firstname") String firstName,
+            @WebParam(name="email") @PathParam("email") String email,@WebParam(name="password") @PathParam("password") String password);
 
     @WebMethod
     @GET
