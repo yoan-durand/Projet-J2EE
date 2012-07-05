@@ -8,11 +8,19 @@ import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import com.mti.webshare.utilitaire.Encryptor;
+import java.io.Serializable;
+import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import org.hibernate.*;
+import org.hibernate.classic.Session;
+import org.hibernate.engine.FilterDefinition;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.metadata.CollectionMetadata;
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +49,8 @@ public class UserDAOImpl implements UserDAO
             user.setPassword(Encryptor.getEncodedPassword(password));
             user.setDeleted(Boolean.FALSE);
            
+            
+            
             sessionFactory.getCurrentSession().save(user);
 
             return (true);

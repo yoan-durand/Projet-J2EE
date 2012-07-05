@@ -14,7 +14,12 @@ import javax.jws.WebService;
  */
 
 @WebService
-public interface IWebService {
+public interface IWebService 
+{
     @WebMethod
     public int add(@WebParam(name="a") int a, @WebParam(name="b") int b);
+    
+    @WebMethod
+    public String addUser(@WebParam(name="lastname") String lastName, @WebParam(name="firstname") String firstName, @WebParam(name="email") String email,
+    @WebParam(name="password")String password);
 }
