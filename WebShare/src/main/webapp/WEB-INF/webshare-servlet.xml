@@ -10,6 +10,7 @@
     
     <!-- Controllers -->
     <context:component-scan base-package="com.mti.webshare.controller"/>
+    <context:component-scan base-package="com.mti.webshare.webserice"/>
     
     <!-- Views -->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">

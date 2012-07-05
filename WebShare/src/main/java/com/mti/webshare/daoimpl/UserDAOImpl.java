@@ -86,15 +86,15 @@ public class UserDAOImpl implements UserDAO
     {
         try
         {
-            Integer userId = id;
-            Query q = sessionFactory.getCurrentSession().createSQLQuery("from User wher id = ?");
-            q.setParameter(0, userId.toString() , Hibernate.STRING);
-           
+            //Integer userId = id;
+            Query q = sessionFactory.getCurrentSession().createSQLQuery("from User where id = ?");
+            q.setParameter(0, id);
+            List<User> list = q.list();
             User user = (User) q.uniqueResult();
             return user;
         }
         catch (Exception e) 
-        {
+        {          
             return null;
         }
     }
