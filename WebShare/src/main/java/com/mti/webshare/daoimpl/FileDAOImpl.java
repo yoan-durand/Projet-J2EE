@@ -6,9 +6,11 @@
 package com.mti.webshare.daoimpl;
 
 import com.mti.webshare.dao.FileDAO;
+import com.mti.webshare.model.Event;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -52,6 +54,15 @@ public class FileDAOImpl implements FileDAO
  
             sessionFactory.getCurrentSession().save(file);
             sessionFactory.getCurrentSession().save(userfile);
+            
+            Event event = new Event();
+            event.setEventAction(1);
+            event.setEventDate(new Date());
+            event.setFile_id(file.getId());
+            event.setUser_id(user.getId());
+            
+            sessionFactory.getCurrentSession().save(event);
+            
             return true;
         }
         catch (Exception e)

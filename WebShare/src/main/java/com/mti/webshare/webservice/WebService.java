@@ -6,11 +6,16 @@ package com.mti.webshare.webservice;
 
 
 
+
 import com.mti.webshare.dao.UserDAO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
+import com.mti.webshare.dao.UserDAO;
+import com.mti.webshare.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
@@ -24,16 +29,15 @@ public class WebService implements IWebService{
     
     @Autowired
     private UserDAO userDAO;
-            
+    
+
     public WebService()
     {
     }
     
-    @GET
-    @Path("/add/{a}/{b}")
-    @Produces("text/plain")
+    
     @Override
-    public int add(@PathParam("a")int a, @PathParam("b")int b) {
+    public int add(int a, int b) {
         return a+b;
     }
 
@@ -52,4 +56,15 @@ public class WebService implements IWebService{
     }
 
     
+
+    
+    @Override
+    public String getUser(String email){
+        User u = userDAO.get(email);
+        if (u == null){
+            return "No user found";
+        }
+        return u.getFirstname();
+    }
+
 }

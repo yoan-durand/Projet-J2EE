@@ -41,6 +41,17 @@ public class FileUploaded implements Serializable
     @Column(name="deleted")
     private Boolean deleted;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "file_id", cascade= CascadeType.ALL)
+    private Set<Event> events = new HashSet<Event>(0);
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.file", cascade= CascadeType.ALL)
     private Set<UserFile> userFile = new HashSet<UserFile>(0);
 
