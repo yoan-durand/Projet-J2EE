@@ -22,20 +22,5 @@
         <a href="/File/upload.htm" > Upload</a>
         <a href="/File/download.htm" > Download</a>
         <a href="/File/myDirectory.htm" > Mon répertoire</a>
-        <input id="events" type="button" value="Events">
     </body>
 </html>
-
-<script>
-    $(document).ready(function (){
-        $("events").click(function (){
-            $.ajax({
-                url: "/ws/soap/getEvents",
-                data: { email: "<%request.getSession().getAttribute("user");%>" },
-                success: function(data) {
-                    
-                }
-            });
-        });
-    });
-</script>

@@ -9,7 +9,6 @@ import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import java.util.List;
 import java.util.Set;
-import org.codehaus.jettison.json.JSONObject;
 
 
 
