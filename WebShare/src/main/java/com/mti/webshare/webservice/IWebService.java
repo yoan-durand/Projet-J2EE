@@ -30,4 +30,10 @@ public interface IWebService {
     @Path("/getUser/{email}")
     @Produces("text/plain")
     public String getUser(@WebParam(name="email") @PathParam("email") String email);
+    
+    @WebMethod
+    @GET
+    @Path("/getEvents/{email}")
+    @Produces("application/json")
+    public String getEvents(@WebParam(name="email") @PathParam("email") String email);
 }
