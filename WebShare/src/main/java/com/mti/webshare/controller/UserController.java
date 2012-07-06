@@ -60,7 +60,7 @@ public class UserController
                         boolean isCreated = new java.io.File(request.getSession().getServletContext().getInitParameter("serverLocation")+email).mkdir();
                         if (isCreated)
                         {
-                            fileDAO.create(email, false, request.getSession().getServletContext().getInitParameter("serverLocation")+email, true, userDAO.get(email));
+                            fileDAO.create(email, false, request.getSession().getServletContext().getInitParameter("serverLocation")+email, true, userDAO.get(email), Boolean.TRUE, 0);
                             return new ModelAndView("addShop", "message", "SUCCESS");
                         }
                     }
