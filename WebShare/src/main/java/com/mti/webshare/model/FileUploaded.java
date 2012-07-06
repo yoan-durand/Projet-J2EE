@@ -41,6 +41,17 @@ public class FileUploaded implements Serializable
     @Column(name="deleted")
     private Boolean deleted;
     
+    @Column(name="parent_id")
+    private int parent_id;
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
+    }
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "file_id", cascade= CascadeType.ALL)
     private Set<Event> events = new HashSet<Event>(0);
 

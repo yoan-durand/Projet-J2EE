@@ -38,7 +38,7 @@ public class FileDAOImpl implements FileDAO
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user)
+    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, int parent_id)
     {
         try
         {
@@ -49,16 +49,22 @@ public class FileDAOImpl implements FileDAO
             file.setIsPublic(ispublic);
             file.setName(name);
             file.setPath(path);
-            
-            UserFile userfile = new UserFile();
-            userfile.setFile(file);
-            userfile.setUser(user);
-            userfile.setState(Boolean.TRUE);
-
-            file.getUserFile().add(userfile);
- 
+            if (parent_id != 0)
+            {
+                file.setParent_id(parent_id);
+            }
             sessionFactory.getCurrentSession().save(file);
-            sessionFactory.getCurrentSession().save(userfile);
+            
+            if (isroot)
+            {
+                UserFile userfile = new UserFile();
+                userfile.setFile(file);
+                userfile.setUser(user);
+                userfile.setState(Boolean.TRUE);
+
+                file.getUserFile().add(userfile);
+                sessionFactory.getCurrentSession().save(userfile);
+            }
             
             Event event = new Event();
             event.setEventAction(1);
