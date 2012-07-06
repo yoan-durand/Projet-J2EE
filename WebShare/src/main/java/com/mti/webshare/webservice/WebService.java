@@ -4,9 +4,6 @@
  */
 package com.mti.webshare.webservice;
 
-
-
-
 import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.FileUploaded;
@@ -33,13 +30,6 @@ public class WebService implements IWebService{
     {
     }
     
-    
-    @Override
-    public int add(int a, int b) {
-        return a+b;
-    }
-
-    
     @Override
     public String addUser(String lastName, String firstName, String email, String password)
     {
@@ -51,6 +41,10 @@ public class WebService implements IWebService{
        return (str);
     }
 
+    @Override
+    public String getEvents(String email) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     @Override
     public String getUser(int id){
@@ -63,5 +57,4 @@ public class WebService implements IWebService{
         FileUploaded file = fileDAO.get(id);
         return fileDAO.toJson(file);
     }
-
 }
