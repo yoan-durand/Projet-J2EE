@@ -8,7 +8,7 @@
         <title>Inscription</title>
     </head>
     <body>
-        <form action="ws/soap/add/user" method="post">
+        <form action="" method="post">
             
             Nom: <input type="text" name="lastname" />
             Prenom: <input type="text" name="firstname"/>
