@@ -5,10 +5,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Inscription</title>
     </head>
     <body>
-        <form action="" method="post">
+        <form action="ws/soap/add/user" method="post">
             
             Nom: <input type="text" name="lastname" />
             Prenom: <input type="text" name="firstname"/>

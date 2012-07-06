@@ -9,6 +9,7 @@ import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import java.util.List;
 import java.util.Set;
+import org.codehaus.jettison.json.JSONObject;
 
 
 
@@ -25,4 +26,5 @@ public interface UserDAO
     public User get (String email);
     public List<User> getList ();
     public Set<UserFile> getUserFile(String userMail);
+    public String toJson(User user);
 }

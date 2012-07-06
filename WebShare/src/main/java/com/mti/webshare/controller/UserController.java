@@ -36,7 +36,6 @@ public class UserController
         @RequestMapping(value="/Inscription.htm", method = RequestMethod.GET)
 	public ModelAndView inscription_get()
         {
-            User u = userDAO.get(1);
             return new ModelAndView("Inscription");
 	}
     
