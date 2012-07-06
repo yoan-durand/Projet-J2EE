@@ -27,8 +27,6 @@ public interface IWebService
     @Consumes("application/x-www-form-urlencoded")
     public String addUser(@WebParam(name="lastname") @FormParam("lastname")  String lastname, @WebParam(name="firstname") @FormParam("firstname") String firstname,
             @WebParam(name="email") @FormParam("email") String email,@WebParam(name="password") @FormParam("password") String password);
-
-
     @WebMethod
     @GET
     @Path("/getEvents/{email}")
@@ -54,4 +52,9 @@ public interface IWebService
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getUserList();
 
+    @WebMethod
+    @GET   
+    @Path("/getFolderContent/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getFolderContent (@WebParam(name="id") @PathParam("id") int id);
 }

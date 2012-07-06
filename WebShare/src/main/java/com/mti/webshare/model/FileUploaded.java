@@ -42,7 +42,7 @@ public class FileUploaded implements Serializable
     @Column(name="deleted")
     private Boolean deleted;
     
-    @Column(name="parent_id", nullable=true)
+    @Column(name="parent_id", nullable = true)
     private Integer parent_id;
 
     public Integer getParent_id() {

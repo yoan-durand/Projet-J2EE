@@ -9,11 +9,9 @@ import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.User;
-
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  *
  * @author damiensoulard
@@ -27,6 +25,7 @@ public class WebService implements IWebService
     
     @Autowired
     private UserDAO userDAO;
+    @Autowired
     private FileDAO fileDAO;
     
 
@@ -53,16 +52,12 @@ public class WebService implements IWebService
        
        return str;
     }
-        
- 
-
-
+       
     @Override
     public String getEvents(String email) 
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
     
     @Override
     public String getUser(int id){
@@ -89,5 +84,14 @@ public class WebService implements IWebService
             return "No users found";
         }
         return userDAO.toJson(u);
+    }
+
+    @Override
+    public String getFolderContent(int id) {
+        List<FileUploaded> u = fileDAO.getFolderContent (id);
+        if (u == null){
+            return "No files here";
+        }
+        return fileDAO.toJson(u);
     }
 }

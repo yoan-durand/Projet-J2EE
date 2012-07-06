@@ -57,7 +57,7 @@ public class ConnexionController
                 return new ModelAndView("addShop", "message", "Fail");
             }
         }
-        return new ModelAndView("");
+        return new ModelAndView("Connexion");
     }
 
     

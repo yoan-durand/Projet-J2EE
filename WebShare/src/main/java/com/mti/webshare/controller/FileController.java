@@ -60,7 +60,7 @@ public class FileController {
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.POST)
-    public ModelAndView upload_post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileUploadException, Exception
+    public void upload_post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileUploadException, Exception
     {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart)
@@ -87,7 +87,7 @@ public class FileController {
                 }
             }
         }
-        return new ModelAndView("navigator");
+        //return new ModelAndView("navigator");
     }
     
     
