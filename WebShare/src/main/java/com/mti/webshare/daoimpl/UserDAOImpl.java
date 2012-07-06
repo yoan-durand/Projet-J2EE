@@ -8,19 +8,15 @@ import com.mti.webshare.dao.UserDAO;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import com.mti.webshare.utilitaire.Encryptor;
-import java.io.Serializable;
-import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import javax.naming.NamingException;
-import javax.naming.Reference;
-import org.hibernate.*;
-import org.hibernate.classic.Session;
-import org.hibernate.engine.FilterDefinition;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.metadata.CollectionMetadata;
-import org.hibernate.stat.Statistics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,11 +92,10 @@ public class UserDAOImpl implements UserDAO
     {
         try
         {
-            //Integer userId = id;
-            Query q = sessionFactory.getCurrentSession().createSQLQuery("from User where id = ?");
+            Query q = sessionFactory.getCurrentSession().createQuery("from User where id = ?");
             q.setParameter(0, id);
-            List<User> list = q.list();
             User user = (User) q.uniqueResult();
+            sessionFactory.getCurrentSession().persist(user);
             return user;
         }
         catch (Exception e) 
@@ -117,7 +112,9 @@ public class UserDAOImpl implements UserDAO
             Query q = sessionFactory.getCurrentSession().createQuery("from User  where email = ?");
             q.setParameter(0, email, Hibernate.STRING);
             
-            return (User) q.uniqueResult();
+            User user = (User) q.uniqueResult();
+            sessionFactory.getCurrentSession().persist(user);
+            return user;
         }
         catch (Exception e)
         {
@@ -155,6 +152,21 @@ public class UserDAOImpl implements UserDAO
         }
         catch (Exception e)
         {
+            return null;
+        }
+    }
+    
+    @Override
+    public String toJson(User user){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", user.getId());
+            json.put("firstname", user.getFirstname());
+            json.put("lastname", user.getLastname());
+            json.put("email", user.getEmail());
+            return json.toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
