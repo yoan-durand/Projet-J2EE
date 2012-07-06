@@ -88,8 +88,9 @@
 <script>
     $(document).ready(function (){
         
-        $(".file_item").click(function (){
+        $(".file_item").live("click", function (){
             var id = $(this).attr("id");
+            $("#id_parent").attr({"value" : id});
             $.ajax({
                     url: "/ws/rest/getFolderContent/"+id,
                     dataType:"json",

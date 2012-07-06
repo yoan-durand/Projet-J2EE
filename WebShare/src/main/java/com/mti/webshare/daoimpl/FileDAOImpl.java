@@ -196,7 +196,7 @@ public class FileDAOImpl implements FileDAO
     public List<FileUploaded> getRootFolder(int id) {
          try 
         {
-            Query q = sessionFactory.getCurrentSession().createQuery("from user where id = :id");  
+            Query q = sessionFactory.getCurrentSession().createQuery("from User where id = :id");  
             q.setParameter("id", id);
             User user = (User) q.uniqueResult();
             Set<UserFile> set_files = user.getUserFile();
