@@ -32,11 +32,8 @@ public class WebService implements IWebService{
     }
     
     @Override
-    public String getUser(String email){
-        User u = userDAO.get(email);
-        if (u == null){
-            return "No user found";
-        }
-        return u.getFirstname();
+    public String getUser(int id){
+        User u = userDAO.get(id);
+        return userDAO.toJson(u);
     }
 }
