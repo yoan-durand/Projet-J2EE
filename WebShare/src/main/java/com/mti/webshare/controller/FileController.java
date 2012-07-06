@@ -6,10 +6,7 @@ import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.FileView;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -153,7 +150,12 @@ public class FileController {
         boolean isCreated = new java.io.File(path).mkdir();
         if (isCreated)
         {
-            fileDAO.create(dirName, Boolean.TRUE, path, Boolean.TRUE, user, Boolean.FALSE, id_parent);
+            Integer id = fileDAO.create(dirName, Boolean.TRUE, path, Boolean.TRUE, user, Boolean.FALSE, id_parent);
+            FileUploaded fileuploaded = fileDAO.get(id);
+            FileView view = new FileView(fileuploaded);
+            response.setContentType("application/json");
+            PrintWriter writer = response.getWriter();
+            writer.print(view.toJson());
         }
     }
 

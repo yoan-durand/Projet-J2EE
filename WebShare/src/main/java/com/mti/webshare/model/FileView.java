@@ -4,7 +4,12 @@
  */
 package com.mti.webshare.model;
 
+import com.mti.webshare.daoimpl.UserDAOImpl;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -109,5 +114,20 @@ public class FileView
     public void setVisibility(String visibility)
     {
         this.visibility = visibility;
-    }    
+    }
+    
+    public String toJson(){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", this.id);
+            json.put("name", this.name);
+            json.put("visibility",this.visibility);
+            json.put("modif_date", this.modif_date);
+            json.put("type", this.type);
+            return json.toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

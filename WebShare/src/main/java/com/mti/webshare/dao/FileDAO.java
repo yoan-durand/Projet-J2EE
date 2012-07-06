@@ -21,7 +21,7 @@ import java.util.List;
 
 public interface FileDAO 
 {
-    public Boolean create (String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, Integer parent_id);
+    public Integer create (String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, Integer parent_id);
     public Boolean update (FileUploaded file);
     public Boolean deleted (FileUploaded file);
     public FileUploaded get(int id);
