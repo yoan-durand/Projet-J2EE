@@ -7,6 +7,7 @@ package com.mti.webshare.webservice;
 
 
 
+import com.mti.webshare.dao.FileDAO;
 import com.mti.webshare.dao.UserDAO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,6 +30,7 @@ public class WebService implements IWebService{
     
     @Autowired
     private UserDAO userDAO;
+
     
 
     public WebService()
