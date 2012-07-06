@@ -51,9 +51,10 @@ public class WebService implements IWebService
        
        return str;
     }
-        
+       
     @Override
-    public String getEvents(String email) {
+    public String getEvents(String email) 
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

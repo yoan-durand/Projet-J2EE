@@ -27,7 +27,6 @@ public interface IWebService
     @Consumes("application/x-www-form-urlencoded")
     public String addUser(@WebParam(name="lastname") @FormParam("lastname")  String lastname, @WebParam(name="firstname") @FormParam("firstname") String firstname,
             @WebParam(name="email") @FormParam("email") String email,@WebParam(name="password") @FormParam("password") String password);
-
     @WebMethod
     @GET
     @Path("/getEvents/{email}")
