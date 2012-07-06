@@ -26,4 +26,5 @@ public interface FileDAO
     public Boolean deleted (FileUploaded file);
     public FileUploaded get(int id);
     public List<FileUploaded> getList ();
+    public String toJson(FileUploaded file);
 }
