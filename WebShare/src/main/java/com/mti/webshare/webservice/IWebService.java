@@ -43,4 +43,5 @@ public interface IWebService
     @Path("/getUser/{id}")
     @Produces("text/plain")
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
+    
 }
