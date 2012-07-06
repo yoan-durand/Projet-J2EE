@@ -45,6 +45,8 @@ public class UserDAOImpl implements UserDAO
             user.setPassword(Encryptor.getEncodedPassword(password));
             user.setDeleted(Boolean.FALSE);
            
+            
+            
             sessionFactory.getCurrentSession().save(user);
 
             return (true);
