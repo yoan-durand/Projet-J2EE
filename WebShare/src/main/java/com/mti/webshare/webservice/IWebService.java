@@ -8,10 +8,8 @@ import com.mti.webshare.model.User;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -23,12 +21,13 @@ public interface IWebService
 {   
     
     @WebMethod
-    @GET
-    @Path("/adduser/{lastname}/{firstname}/{email}/{password}")
+    @POST
+    @Path("/addUser")
     @Produces("text/plain")
-    public String addUser(@WebParam(name="lastname") @PathParam("lastname")  String lastName, @WebParam(name="firstname") @PathParam("firstname") String firstName,
-            @WebParam(name="email") @PathParam("email") String email,@WebParam(name="password") @PathParam("password") String password);
-    
+    @Consumes("application/x-www-form-urlencoded")
+    public String addUser(@WebParam(name="lastname") @FormParam("lastname")  String lastname, @WebParam(name="firstname") @FormParam("firstname") String firstname,
+            @WebParam(name="email") @FormParam("email") String email,@WebParam(name="password") @FormParam("password") String password);
+
     @WebMethod
     @GET
     @Path("/getEvents/{email}")
@@ -38,25 +37,25 @@ public interface IWebService
     @WebMethod
     @GET
     @Path("/getUser/{id}")
-    @Produces("application/json")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
+
     
     @WebMethod
     @GET
     @Path("/getFile/{id}")
-    @Produces("text/plain")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getFile(@WebParam(name="id") @PathParam("id") int id);
     
     @WebMethod
     @GET
     @Path("/getUserList/")
-    @Produces("application/json")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getUserList();
 
     @WebMethod
     @GET   
     @Path("/getFolderContent/{id}")
-    @Produces("text/plain")
+    @Produces({MediaType.APPLICATION_JSON})
     public String getFolderContent (@WebParam(name="id") @PathParam("id") int id);
-
 }

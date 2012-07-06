@@ -12,7 +12,7 @@
         
         <form action="" method="post">
             login : <input type="text" name="login"/>
-            password : <input type="text" name="password" />
+            password : <input type="password" name="password" />
             <input type="submit" value="connexion" />
         </form>
         
