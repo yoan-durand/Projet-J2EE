@@ -26,4 +26,5 @@ public interface UserDAO
     public List<User> getList ();
     public Set<UserFile> getUserFile(String userMail);
     public String toJson(User user);
+    public String toJson(List<User> users);
 }

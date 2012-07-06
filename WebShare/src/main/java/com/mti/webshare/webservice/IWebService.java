@@ -4,6 +4,7 @@
  */
 package com.mti.webshare.webservice;
 
+import com.mti.webshare.model.User;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -31,13 +32,13 @@ public interface IWebService
     @WebMethod
     @GET
     @Path("/getEvents/{email}")
-    @Produces("application/json")
+    @Produces("text/plain")
     public String getEvents(@WebParam(name="email") @PathParam("email") String email);
 
     @WebMethod
     @GET
     @Path("/getUser/{id}")
-    @Produces("text/plain")
+    @Produces("application/json")
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
     
     @WebMethod
@@ -46,5 +47,9 @@ public interface IWebService
     @Produces("text/plain")
     public String getFile(@WebParam(name="id") @PathParam("id") int id);
     
-    
+    @WebMethod
+    @GET
+    @Path("/getUserList/")
+    @Produces("application/json")
+    public String getUserList();
 }
