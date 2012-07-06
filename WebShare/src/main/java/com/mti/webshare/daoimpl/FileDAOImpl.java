@@ -10,8 +10,10 @@ import com.mti.webshare.model.Event;
 import com.mti.webshare.model.FileUploaded;
 import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.ws.Service;
@@ -187,6 +189,28 @@ public class FileDAOImpl implements FileDAO
             return json.toString();
         } catch (JSONException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public List<FileUploaded> getRootFolder(int id) {
+         try 
+        {
+            Query q = sessionFactory.getCurrentSession().createQuery("from user where id = :id");  
+            q.setParameter("id", id);
+            User user = (User) q.uniqueResult();
+            Set<UserFile> set_files = user.getUserFile();
+            List<FileUploaded> list = new ArrayList<FileUploaded>();
+            for (UserFile userfile : set_files)
+            {
+                list.add(userfile.getFile());
+            }
+            
+            return list;
+        }
+        catch (Exception e) 
+        {
             return null;
         }
     }

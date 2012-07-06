@@ -27,6 +27,7 @@ public interface FileDAO
     public FileUploaded get(int id);
     public List<FileUploaded> getList ();
     public List<FileUploaded> getFolderContent(int id);
+    public List<FileUploaded> getRootFolder (int id);
     public String toJson(FileUploaded file);
     public String toJson(List<FileUploaded> file_list);
 }

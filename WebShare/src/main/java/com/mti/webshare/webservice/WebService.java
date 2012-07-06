@@ -94,4 +94,13 @@ public class WebService implements IWebService
         }
         return fileDAO.toJson(u);
     }
+
+    @Override
+    public String getRootFolder(int id) {
+         List<FileUploaded> u = fileDAO.getRootFolder (id);
+        if (u == null){
+            return "No files here";
+        }
+        return fileDAO.toJson(u);
+    }
 }

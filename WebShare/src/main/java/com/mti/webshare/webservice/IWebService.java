@@ -57,4 +57,10 @@ public interface IWebService
     @Path("/getFolderContent/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public String getFolderContent (@WebParam(name="id") @PathParam("id") int id);
+    
+    @WebMethod
+    @GET
+    @Path ("/getRootFolder/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getRootFolder (@WebParam(name="id") @PathParam("id") int id);
 }
