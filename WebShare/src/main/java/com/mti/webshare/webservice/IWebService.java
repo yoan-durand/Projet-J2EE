@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -38,18 +39,18 @@ public interface IWebService
     @WebMethod
     @GET
     @Path("/getUser/{id}")
-    @Produces("application/json")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
     
     @WebMethod
     @GET
     @Path("/getFile/{id}")
-    @Produces("text/plain")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getFile(@WebParam(name="id") @PathParam("id") int id);
     
     @WebMethod
     @GET
     @Path("/getUserList/")
-    @Produces("application/json")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     public String getUserList();
 }
