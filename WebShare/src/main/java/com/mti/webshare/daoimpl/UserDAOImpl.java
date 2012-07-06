@@ -170,4 +170,18 @@ public class UserDAOImpl implements UserDAO
             return null;
         }
     }
+    
+    @Override
+    public String toJson(List<User> users){
+        JSONObject json = new JSONObject();
+        try {
+            for(User user:users){
+             json.accumulate("users", toJson(user));   
+            }
+            return json.toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }
