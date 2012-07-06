@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.ws.Service;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.hibernate.Query;
@@ -38,7 +37,7 @@ public class FileDAOImpl implements FileDAO
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, int parent_id)
+    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, Integer parent_id)
     {
         try
         {
@@ -49,9 +48,13 @@ public class FileDAOImpl implements FileDAO
             file.setIsPublic(ispublic);
             file.setName(name);
             file.setPath(path);
-            if (parent_id != 0)
+            if (parent_id != null && parent_id != 0)
             {
                 file.setParent_id(parent_id);
+            }
+            else
+            {
+                file.setParent_id(null);
             }
             sessionFactory.getCurrentSession().save(file);
             

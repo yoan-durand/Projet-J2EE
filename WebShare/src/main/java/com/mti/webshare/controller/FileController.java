@@ -136,22 +136,24 @@ public class FileController {
     @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)
     public void create_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String dirName = (String)request.getSession().getAttribute("name");
-        Integer id_parent = (Integer)request.getSession().getAttribute("id_parent");
-        String email = (String)request.getSession().getAttribute("email");
+        String dirName = request.getParameter("name").toString();
+        Integer id_parent = Integer.parseInt(request.getParameter("id_parent").toString());
+        String email = request.getParameter("email").toString();
         User user = userDAO.get(email);
         FileUploaded file = fileDAO.get(id_parent);
-        boolean isCreated = new java.io.File(file.getPath()+"/"+dirName).mkdir();
+        String path;
+        if (file != null)
+        {
+            path = file.getPath()+"/"+dirName;
+        }
+        else
+        {
+            path = request.getSession().getServletContext().getInitParameter("serverLocation")+user.getEmail()+"/"+dirName;
+        }
+        boolean isCreated = new java.io.File(path).mkdir();
         if (isCreated)
         {
-            if (id_parent == 0)
-            {
-                fileDAO.create(dirName, Boolean.TRUE, request.getSession().getServletContext().getInitParameter("serverLocation")+user.getEmail()+"/"+dirName, Boolean.TRUE, user, Boolean.TRUE, 0);
-            }
-            else
-            {
-                fileDAO.create(dirName, Boolean.TRUE, file.getPath()+"/"+dirName, Boolean.TRUE, user, Boolean.FALSE, id_parent);
-            }
+            fileDAO.create(dirName, Boolean.TRUE, path, Boolean.TRUE, user, Boolean.FALSE, id_parent);
         }
     }
 

@@ -110,7 +110,7 @@
         
         $("#post").click(function (){
             var dirName = $("#dirName").val();
-            var id = $("#id_parent").val();
+            var id = $("#id_parent").attr("value");
             if (dirName != "")
             {
                 $.ajax({
