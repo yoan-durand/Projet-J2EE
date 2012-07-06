@@ -22,12 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @javax.jws.WebService(
   endpointInterface = "com.mti.webshare.webservice.IWebService",
   serviceName = "WebService")
-public class WebService implements IWebService{
+public class WebService implements IWebService
+{
     
     @Autowired
     private UserDAO userDAO;
     private FileDAO fileDAO;
-    private HttpServletRequest request;
+
 
     
 
@@ -53,14 +54,16 @@ public class WebService implements IWebService{
            str = "Nouvel utlisateur creer : ";
            str +=  lastName +" "+firstName+" "+email;
            
-       } 
+       }
        else
        {
            str = "Une erreur est survenue lors de l'insertion.";
        }
-        
+       
        return str;
     }
+        
+ 
 
     
     

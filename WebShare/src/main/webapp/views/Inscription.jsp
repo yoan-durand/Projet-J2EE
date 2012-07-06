@@ -9,7 +9,7 @@
         
     </head>
     <body>
-        <form action="/ws/rest/addUser" method="POST">
+        <form action="" method="POST">
             
             Nom: <input type="text" name="lastname" />
             Prenom: <input type="text" name="firstname"/>
