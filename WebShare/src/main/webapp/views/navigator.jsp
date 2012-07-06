@@ -58,7 +58,7 @@
                     <br class="clear"/>
                 </li>
               <c:forEach var="file" items="${view.get('file_list')}">
-                    <li class="file_item">
+                    <li id="${file.id}" class="file_item">
                         <span class="file_name float-left">${file.name}</span>
                         <span  class="file_type float-left">${file.type}</span>
                         <span  class="file_modification float-left">${file.modif_date}</span >
@@ -77,20 +77,66 @@
             <div id="who_share" class="float-right">
                 Qui partage ce dossier?
             </div>
+            <div class="clear"/>
+            <div id="response" class="float-left">
+            </div>
         </section>
+        <div id="id_parent" hidden="hidden" value="0"/>
     </body>
 </html>
 
 <script>
     $(document).ready(function (){
-        $("#post").click(function (){
+        
+        $(".file_item").click(function (){
+            var id = $(this).attr("id");
             $.ajax({
-                url: "/ws/soap/getEvents",
-                data: { email: "<%request.getSession().getAttribute("user");%>" },
-                success: function(data) {
-                    
-                }
-            });
+                    url: "/ws/rest/getFolderContent/"+id,
+                    dataType:"json",
+                    success: function() {
+                        $("#response").text("Success").show("blind", null, 1500, function (){
+                            $(this).text("");
+                            $("#dirName").val("");
+                        });
+                    },
+                    error: function() {
+                        $("#response").text("Fail").show("blind", null, 1500, function (){
+                            $(this).text("");
+                            $("#dirName").val("");
+                        });
+                    }
+                });
+        });
+        
+        $("#post").click(function (){
+            var dirName = $("#dirName").val();
+            var id = $("#id_parent").val();
+            if (dirName != "")
+            {
+                $.ajax({
+                    url: "/File/createDirectory.htm",
+                    data: { name : dirName, id_parent : id, email : "<% out.print(request.getSession().getAttribute("user"));%>" },
+                    success: function() {
+                        $("#response").text("Success").show("blind", null, 1500, function (){
+                            $(this).text("");
+                            $("#dirName").val("");
+                        });
+                    },
+                    error: function() {
+                        $("#response").text("Fail").show("blind", null, 1500, function (){
+                            $(this).text("");
+                            $("#dirName").val("");
+                        });
+                    }
+                });
+            }
+            else
+            {
+                $("#response").text("Fail").show("blind", null, 1500, function (){
+                    $(this).text("");
+                    $("#dirName").val("");
+                });
+            }
         });
     });
 </script>

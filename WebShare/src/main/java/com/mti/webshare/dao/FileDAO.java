@@ -21,10 +21,12 @@ import java.util.List;
 
 public interface FileDAO 
 {
-    public Boolean create (String name, Boolean ispublic, String path, Boolean isDir, User user);
+    public Boolean create (String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, int parent_id);
     public Boolean update (FileUploaded file);
     public Boolean deleted (FileUploaded file);
     public FileUploaded get(int id);
     public List<FileUploaded> getList ();
+    public List<FileUploaded> getFolderContent(int id);
     public String toJson(FileUploaded file);
+    public String toJson(List<FileUploaded> file_list);
 }

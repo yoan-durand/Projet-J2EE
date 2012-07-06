@@ -63,7 +63,7 @@ public class FileController {
     }
     
     @RequestMapping(value = "/upload.htm", method = RequestMethod.POST)
-    public ModelAndView upload_post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileUploadException, Exception
+    public void upload_post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileUploadException, Exception
     {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart)
@@ -90,7 +90,7 @@ public class FileController {
                 }
             }
         }
-        return new ModelAndView("navigator");
+        //return new ModelAndView("navigator");
     }
     
     
@@ -136,7 +136,23 @@ public class FileController {
     @RequestMapping(value = "/createDirectory.htm", method = RequestMethod.GET)
     public void create_directory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
+        String dirName = (String)request.getSession().getAttribute("name");
+        Integer id_parent = (Integer)request.getSession().getAttribute("id_parent");
+        String email = (String)request.getSession().getAttribute("email");
+        User user = userDAO.get(email);
+        FileUploaded file = fileDAO.get(id_parent);
+        boolean isCreated = new java.io.File(file.getPath()+"/"+dirName).mkdir();
+        if (isCreated)
+        {
+            if (id_parent == 0)
+            {
+                fileDAO.create(dirName, Boolean.TRUE, request.getSession().getServletContext().getInitParameter("serverLocation")+user.getEmail()+"/"+dirName, Boolean.TRUE, user, Boolean.TRUE, 0);
+            }
+            else
+            {
+                fileDAO.create(dirName, Boolean.TRUE, file.getPath()+"/"+dirName, Boolean.TRUE, user, Boolean.FALSE, id_parent);
+            }
+        }
     }
 
 }

@@ -38,7 +38,7 @@ public class FileDAOImpl implements FileDAO
     private SessionFactory sessionFactory;
 
     @Override
-    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user)
+    public Boolean create(String name, Boolean ispublic, String path, Boolean isDir, User user, Boolean isroot, int parent_id)
     {
         try
         {
@@ -49,16 +49,22 @@ public class FileDAOImpl implements FileDAO
             file.setIsPublic(ispublic);
             file.setName(name);
             file.setPath(path);
-            
-            UserFile userfile = new UserFile();
-            userfile.setFile(file);
-            userfile.setUser(user);
-            userfile.setState(Boolean.TRUE);
-
-            file.getUserFile().add(userfile);
- 
+            if (parent_id != 0)
+            {
+                file.setParent_id(parent_id);
+            }
             sessionFactory.getCurrentSession().save(file);
-            sessionFactory.getCurrentSession().save(userfile);
+            
+            if (isroot)
+            {
+                UserFile userfile = new UserFile();
+                userfile.setFile(file);
+                userfile.setUser(user);
+                userfile.setState(Boolean.TRUE);
+
+                file.getUserFile().add(userfile);
+                sessionFactory.getCurrentSession().save(userfile);
+            }
             
             Event event = new Event();
             event.setEventAction(1);
@@ -139,6 +145,22 @@ public class FileDAOImpl implements FileDAO
     }
     
     @Override
+    public List<FileUploaded> getFolderContent(int id) {
+        try 
+        {
+            Query q = sessionFactory.getCurrentSession().createQuery("from FileUploaded where parent_id = :parent_id");  
+            q.setParameter("parent_id", id);
+            List<FileUploaded> files = q.list();
+            
+            return files;
+        }
+        catch (Exception e) 
+        {
+            return null;
+        }
+    }
+    
+    @Override
     public String toJson(FileUploaded file){
         JSONObject json = new JSONObject();
         try {
@@ -153,5 +175,21 @@ public class FileDAOImpl implements FileDAO
             return null;
         }
     }
+
+     @Override
+     public String toJson(List<FileUploaded> file_list){
+    
+        JSONObject json = new JSONObject();
+                try {
+            for(FileUploaded file:file_list){
+             json.accumulate("files", toJson(file));   
+            }
+            return json.toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
 
 }
