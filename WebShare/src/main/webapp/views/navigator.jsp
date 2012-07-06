@@ -57,14 +57,7 @@
                     <strong class="file_visibility float-left"> Visibilité </strong>
                     <br class="clear"/>
                 </li>
-                <li class="file_item">
-                    <span class="file_name float-left"><img class="file_logo float-left" src="logo" /> hello world.txt</span >
-                    <span  class="file_type float-left">.txt file</span >
-                    <span  class="file_modification float-left">01/01/2012</span>
-                    <span  class="file_visibility float-left">private</span >
-                    <br class="clear"/>
-                </li>
-              <c:forEach var="file" items="${list_file}">
+              <c:forEach var="file" items="${view.get('file_list')}">
                     <li class="file_item">
                         <span class="file_name float-left">${file.name}</span>
                         <span  class="file_type float-left">${file.type}</span>
@@ -77,9 +70,27 @@
             <ul id="index">
                 <li class="index_number"></li>
             </ul>
+            <div class="float-left">
+                <input id="dirName" type="text">
+                <input id="post" type="submit" value="Créer ce dossier">
+            </div>
             <div id="who_share" class="float-right">
                 Qui partage ce dossier?
             </div>
         </section>
     </body>
 </html>
+
+<script>
+    $(document).ready(function (){
+        $("#post").click(function (){
+            $.ajax({
+                url: "/ws/soap/getEvents",
+                data: { email: "<%request.getSession().getAttribute("user");%>" },
+                success: function(data) {
+                    
+                }
+            });
+        });
+    });
+</script>
