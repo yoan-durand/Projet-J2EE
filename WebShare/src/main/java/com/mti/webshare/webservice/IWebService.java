@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 
 @WebService
 public interface IWebService 
-{
+{   
     
     @WebMethod
     @GET
@@ -39,4 +39,10 @@ public interface IWebService
     @Path("/getUser/{id}")
     @Produces("text/plain")
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
+    
+    @WebMethod
+    @GET
+    @Path("/getFile/{id}")
+    @Produces("text/plain")
+    public String getFile(@WebParam(name="id") @PathParam("id") int id);
 }

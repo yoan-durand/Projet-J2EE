@@ -12,6 +12,10 @@ import com.mti.webshare.model.User;
 import com.mti.webshare.model.UserFile;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,16 +107,16 @@ public class FileDAOImpl implements FileDAO
     @Override
     public FileUploaded get(int id)
     {
-        try {
-            List<FileUploaded> file = sessionFactory.getCurrentSession().createSQLQuery("select f from file where f.id=:fileId").setProperties(id).list();
-            if (!file.isEmpty())
-            {
-                return file.get(0);
-            }
-            return null;
+        try
+        {
+            Query q = sessionFactory.getCurrentSession().createQuery("from FileUploaded where id = ?");
+            q.setParameter(0, id);
+            FileUploaded file = (FileUploaded) q.uniqueResult();
+            sessionFactory.getCurrentSession().persist(file);
+            return file;
         }
         catch (Exception e) 
-        {
+        {          
             return null;
         }
     }
@@ -129,6 +133,22 @@ public class FileDAOImpl implements FileDAO
         }
         catch (Exception e) 
         {
+            return null;
+        }
+    }
+    
+    @Override
+    public String toJson(FileUploaded file){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", file.getId());
+            json.put("name", file.getName());
+            json.put("path",file.getPath());
+            json.put("isPublic", file.getIsPublic());
+            json.put("isDirectory", file.getIsDir());
+            return json.toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
