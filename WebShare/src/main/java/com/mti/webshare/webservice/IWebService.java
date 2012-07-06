@@ -8,10 +8,7 @@ import com.mti.webshare.model.User;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -26,11 +23,12 @@ public interface IWebService
 
     
     @WebMethod
-    @GET
-    @Path("/adduser/{lastname}/{firstname}/{email}/{password}")
+    @POST
+    @Path("/addUser")
     @Produces("text/plain")
-    public String addUser(@WebParam(name="lastname") @PathParam("lastname")  String lastName, @WebParam(name="firstname") @PathParam("firstname") String firstName,
-            @WebParam(name="email") @PathParam("email") String email,@WebParam(name="password") @PathParam("password") String password);
+    @Consumes("application/x-www-form-urlencoded")
+    public String addUser(@WebParam(name="lastname") @FormParam("lastname")  String lastname, @WebParam(name="firstname") @FormParam("firstname") String firstname,
+            @WebParam(name="email") @FormParam("email") String email,@WebParam(name="password") @FormParam("password") String password);
 
     @WebMethod
     @GET
@@ -43,4 +41,14 @@ public interface IWebService
     @Path("/getUser/{id}")
     @Produces("text/plain")
     public String getUser(@WebParam(name="id") @PathParam("id") int id);
+  
+    /*
+    @WebMethod
+    @GET
+    @Path("/addFile/{name}/{public}/{path}/{isdir}/{isdeleted}/{parent}")
+    @Produces("text/plain");
+    public String addFile (@WebParam(name="name") @PathParam("name") String filename, @WebParam(name="public") @PathParam("public") boolean isPublic,
+           @WebParam(name="path") @PathParam("path") String path, @WebParam(name="isdir") @PathParam("isdir") boolean isDir,
+           @WebParam(name="isdeleted") @PathParam("isdeleted") boolean isdeleted,@WebParam(name="parent") @PathParam("parent") String parent );
+*/
 }

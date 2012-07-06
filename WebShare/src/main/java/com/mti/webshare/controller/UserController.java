@@ -54,7 +54,8 @@ public class UserController
                 if (!password.contentEquals(password2)){
                    return new ModelAndView("addShop", "message", "Different passwords"); 
                 }
-                if (userDAO.create(lastname, firstname, password, email)){
+                if (userDAO.create(lastname, firstname, password, email))
+                {
                     try
                     {
                         boolean isCreated = new java.io.File(request.getSession().getServletContext().getInitParameter("serverLocation")+email).mkdir();
