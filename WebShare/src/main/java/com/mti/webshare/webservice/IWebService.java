@@ -52,4 +52,11 @@ public interface IWebService
     @Path("/getUserList/")
     @Produces("application/json")
     public String getUserList();
+
+    @WebMethod
+    @GET   
+    @Path("/getFolderContent/{id}")
+    @Produces("text/plain")
+    public String getFolderContent (@WebParam(name="id") @PathParam("id") int id);
+
 }

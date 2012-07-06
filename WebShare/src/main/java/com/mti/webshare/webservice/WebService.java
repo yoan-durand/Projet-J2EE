@@ -88,4 +88,13 @@ public class WebService implements IWebService{
         }
         return userDAO.toJson(u);
     }
+
+    @Override
+    public String getFolderContent(int id) {
+        List<FileUploaded> u = fileDAO.getFolderContent (id);
+        if (u == null){
+            return "No files here";
+        }
+        return fileDAO.toJson(u);
+    }
 }
