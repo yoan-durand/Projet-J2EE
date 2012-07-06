@@ -110,13 +110,21 @@
         
         $("#post").click(function (){
             var dirName = $("#dirName").val();
-            var id = $("#id_parent").val();
+            var id = $("#id_parent").attr("value");
             if (dirName != "")
             {
                 $.ajax({
                     url: "/File/createDirectory.htm",
                     data: { name : dirName, id_parent : id, email : "<% out.print(request.getSession().getAttribute("user"));%>" },
-                    success: function() {
+                    success: function(data) {
+                        var text = "<li id='"+data.id+"' class='file_item'>"+
+                                        "<span class='file_name float-left'>"+data.name+"</span>"+
+                                        "<span  class='file_type float-left'>"+data.type+"</span>"+
+                                        "<span  class='file_modification float-left'>"+data.modif_date+"</span >"+
+                                        "<span  class='file_visibility float-left'>"+data.visibility+"</span >"+
+                                        "<br class='clear'/>"+
+                                    "</li>";
+                        $("#file_list").append(text);
                         $("#response").text("Success").show("blind", null, 1500, function (){
                             $(this).text("");
                             $("#dirName").val("");

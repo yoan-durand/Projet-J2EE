@@ -95,7 +95,6 @@ public class UserDAOImpl implements UserDAO
             Query q = sessionFactory.getCurrentSession().createQuery("from User where id = ?");
             q.setParameter(0, id);
             User user = (User) q.uniqueResult();
-            sessionFactory.getCurrentSession().persist(user);
             return user;
         }
         catch (Exception e) 
@@ -113,7 +112,6 @@ public class UserDAOImpl implements UserDAO
             q.setParameter(0, email, Hibernate.STRING);
             
             User user = (User) q.uniqueResult();
-            sessionFactory.getCurrentSession().persist(user);
             return user;
         }
         catch (Exception e)

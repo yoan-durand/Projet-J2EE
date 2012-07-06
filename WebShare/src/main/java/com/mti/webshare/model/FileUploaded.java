@@ -6,6 +6,7 @@ package com.mti.webshare.model;
 
 
 
+import com.sun.istack.Nullable;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,11 +45,11 @@ public class FileUploaded implements Serializable
     @Column(name="parent_id", nullable = true)
     private Integer parent_id;
 
-    public int getParent_id() {
+    public Integer getParent_id() {
         return parent_id;
     }
 
-    public void setParent_id(int parent_id) {
+    public void setParent_id(Integer parent_id) {
         this.parent_id = parent_id;
     }
     
