@@ -49,12 +49,18 @@ public class WebService implements IWebService{
     @Override
     public String getUser(int id){
         User u = userDAO.get(id);
+        if (u == null){
+            return "User not found";
+        }
         return userDAO.toJson(u);
     }
     
     @Override
     public String getFile(int id){
         FileUploaded file = fileDAO.get(id);
+        if (file == null){
+            return "File not found";
+        }
         return fileDAO.toJson(file);
     }
 }
