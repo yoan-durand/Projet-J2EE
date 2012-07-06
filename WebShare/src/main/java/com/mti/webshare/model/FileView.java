@@ -4,6 +4,8 @@
  */
 package com.mti.webshare.model;
 
+import java.util.Date;
+
 /**
  *
  * @author vince
@@ -16,7 +18,7 @@ public class FileView
     
     private String visibility;
     
-    private String modif_date;
+    private Date modif_date;
     
     private String type;
     
@@ -31,14 +33,15 @@ public class FileView
         this.id = file.getId();
         this.name = file.getName();
         this.deleted = file.getDeleted();
-        this.modif_date = "fix me";
+        this.modif_date = new Date();
         if (file.getIsDir())
         {
             this.type = "folder";
         }
         else
         {
-            this.type = "type fix me";
+            String[] filename = file.getName().split(".");
+            this.type = filename[filename.length - 1];
         }
         if (file.getIsPublic())
         {
@@ -49,6 +52,14 @@ public class FileView
             this.visibility = "private";
         }
     }
+
+    public Date getModif_date() {
+        return modif_date;
+    }
+
+    public void setModif_date(Date modif_date) {
+        this.modif_date = modif_date;
+    }
     
     public Boolean getDeleted()
     {
@@ -58,11 +69,6 @@ public class FileView
     public int getId()
     {
         return id;
-    }
-
-    public String getModif_date()
-    {
-        return modif_date;
     }
 
     public String getName()
@@ -88,11 +94,6 @@ public class FileView
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public void setModif_date(String modif_date)
-    {
-        this.modif_date = modif_date;
     }
 
     public void setName(String name)
